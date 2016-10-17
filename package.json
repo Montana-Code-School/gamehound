@@ -1,0 +1,43 @@
+{
+  "name": "fun-advisor",
+  "version": "1.0.0",
+  "description": "make sure all your friends are having fun",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Montana-Code-School/fun-advisor.git"
+  },
+  "author": "smai, jack, stephanie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Montana-Code-School/fun-advisor/issues"
+  },
+  "homepage": "https://github.com/Montana-Code-School/fun-advisor#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.4",
+    "bcrypt-nodejs": "latest",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.0",
+    "express-session": "~1.0.0",
+    "method-override": "~1.0.0",
+    "morgan": "~1.0.0",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "webpack": "^1.13.2"
+  }
+}
