@@ -33,14 +33,14 @@ module.exports = function(passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
      passport.use('local-login', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
+        // by default, local strategy uses username and password, we will override with username
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, done) { // callback with email and password from our form
-        console.log('in callback', email, password)
-        // find a user whose email is throwse same as the forms email
+    function(req, username, password, done) { // callback with username and password from our form
+        console.log('in callback', username, password)
+        // find a user whose username is throwse same as the forms username
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'username' :  email }, function(err, user) {
+        User.findOne({ 'username' :  username }, function(err, user) {
             // if there are any errors, return the error before anything else
             console.log(err, user)
             if (err)
@@ -56,6 +56,53 @@ module.exports = function(passport) {
 
             // all is well, return successful user
             return done(null, user);
+        });
+
+    }));
+
+    passport.use('local-signup', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with username
+        usernameField : 'username',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+
+    function(req, username, password, done) {
+
+        // asynchronous
+        // User.findOne wont fire unless data is sent back
+        process.nextTick(function() {
+
+        // find a user whose username is the same as the forms username
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'username' :  username }, function(err, user) {
+            // if there are any errors, return the error
+            if (err)
+                return done(err);
+
+            // check to see if theres already a user with that username
+            if (user) {
+                return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+            } else {
+
+                // if there is no user with that username
+                // create the user
+                var newUser            = new User();
+
+                // set the user's local credentials
+                newUser.username    = username;
+                newUser.password = newUser.generateHash(password);
+
+                // save the user
+                newUser.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, newUser);
+                });
+            }
+
+        });    
+
         });
 
     }));

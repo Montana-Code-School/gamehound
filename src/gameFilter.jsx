@@ -16,5 +16,3 @@ render() {
 
 }
 
-
-ReactDOM.render(<GameFilter/>, document.getElementById('app'));

@@ -13,17 +13,19 @@ class Login extends React.Component {
                                response => this.props.setLogin(response.loggedIn))
   }
 
-  logOut(){
-    request('/logout', "GET", null, response => this.setState({loggedIn: response.loggedIn}))
-  }
+  
 
   render() {
+    return (
 
-        return  (<div>
-                    <input type="text" onChange={e => this.setState({username: e.target.value})}/>
-                    <input type="password" onChange={e => this.setState({password: e.target.value})}/>
-                    <button type="submit" onClick={this.logIn.bind(this)}>Login</button>
-                </div>)
+      <div>
+        <h3>Log In:</h3>
+        <input type="text" placeholder="Enter username" onChange={(e)=>this.setState({username:e.target.value})} />
+        <input type="password" placeholder="Enter password" onChange={(e)=>this.setState({password:e.target.value})} />
+        <button onClick={this.logIn.bind(this)}>Submit</button>
+
+      </div>
+      )
   }
 }
 

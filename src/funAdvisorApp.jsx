@@ -12,23 +12,30 @@ var request = requests.request
 class FunAdvisorApp extends React.Component {
     componentWillMount() {
         request('/api/user', 'GET', null, loggedInResp => {
-          request('/api/story', 'GET', null, storyResponse => 
-            this.setState({stories: storyResponse,
-            			   loggedIn: loggedInResp.loggedIn
-            			})
-            )
+            this.setState({loggedIn: loggedInResp.loggedIn
+                        })
         })
     }
 
+    setLogin(value){
+        this.setState({loggedIn: value})
+    }
+    
     render() {
         if(!this.state){
-        	return <div>loading... </div>
+            return <div>loading... </div>
+        } else if (!this.state.loggedIn){
+            return (<div>
+                     <Login setLogin={this.setLogin.bind(this)}/>
+                     <SignUp setLogin={this.setLogin.bind(this)}/>
+                    </div>)
         } else {
-        	return (<div>
-        			 <GameFilter />
-        			</div>)
-        } 
+            return (<div> 
+                    <Logout setLogin={this.setLogin.bind(this)}/>
+                   </div>)
+        };
     }
 }
+
 
 ReactDOM.render(<FunAdvisorApp/>, document.getElementById('app'));
