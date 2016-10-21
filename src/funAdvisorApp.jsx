@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GameFilter from './gameFilter.jsx';
-import Login from './login.jsx';
-import Logout from './logout.jsx';
-import SignUp from './signup.jsx';
 import requests from './request.js';
+import UserManagement from './userManagement.jsx'
+import Header from './header.jsx'
 
 var request = requests.request
 
@@ -22,18 +21,15 @@ class FunAdvisorApp extends React.Component {
     }
     
     render() {
+
         if(!this.state){
             return <div>loading... </div>
-        } else if (!this.state.loggedIn){
-            return (<div>
-                     <Login setLogin={this.setLogin.bind(this)}/>
-                     <SignUp setLogin={this.setLogin.bind(this)}/>
-                    </div>)
         } else {
-            return (<div> 
-                    <Logout setLogin={this.setLogin.bind(this)}/>
-                   </div>)
-        };
+            return (<div>
+                     <Header/>
+                     <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
+                    </div>)
+        }
     }
 }
 

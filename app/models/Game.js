@@ -14,9 +14,9 @@ var gameSchema = mongoose.Schema({
 })
 
 //write filter methods here to pick user game
-
+													
 gameSchema.statics.gameRank = function(difficulty, callback) {
-
+	
 }
 
 

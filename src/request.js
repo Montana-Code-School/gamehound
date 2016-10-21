@@ -1,5 +1,7 @@
 // could install 'fetch' to handle requests rather than this pure Javascript way
 
+// This is what postman does on the back end
+
 
 function request(url, method, body, callback){
 	var http = new XMLHttpRequest();

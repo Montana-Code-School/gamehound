@@ -1,5 +1,10 @@
+// needs work still for toggling pushy flash messages with user entering/not entering username and passwords in fields
+// AKA handling the state when showError stays "true" and thus error messages if statements are always going and don't turn off
+
 import React from 'react';
+import keydown from 'react-keydown';
 import requests from './request.js'
+import _ from 'lodash'
 
 var request = requests.request
 var formRequest = requests.formRequest
@@ -7,37 +12,65 @@ var formRequest = requests.formRequest
 class SignUp extends React.Component{
 
 	signUp(){
-		formRequest('/signup', 'POST', {
+		if(_.get(this, 'state.username') && _.get(this, 'state.password')){
+			formRequest('/signup', 'POST', {
 										username: this.state.username,
 										password: this.state.password	
 										},
 										response => {
-											console.log('FLASH MESSAGE', response.flash)
-											this.props.setLogin(response.loggedIn)										
+											console.log(response.flash)
+											this.setError(response.flash);
+											this.props.setLogin(response.loggedIn);								
 										})
+
+		} else { 
+			   this.setState({showError:true})
+
+		}
+		
 	}
 
-	setLogin(value){
-    	this.setState({loggedIn: value})
+
+	add(event){
+         if(event.charCode === 13){
+            this.signUp();
+         }
+     }
+
+
+    setError(value){
+    	this.setState({error:value})
     }
 
-	// checkInfo(){
-	// 	if(this.state.username === ''){
-	// 		this.setState({error : "Username is blank!"})
-	// 	} else if (this.state.password === ''){
-	// 		this.setState({error : "Password is blank!"})
-	// 	} else {
-	// 		console.log("we checked all the info")
-	// 	}
-	// }
+    noUsernameOrPassword(){
+    	console.log("in no username or password")
+    	if(_.get(this,'state.showError')){
+	    	if(!this.state.username){
+	    		return <div className="alert alert-danger">Please enter a username.</div>
+
+	    	} 
+	    	if (!this.state.password){
+	    		return <div className="alert alert-danger">Please enter a password.</div>
+	    	}
+    	}
+    }
+
+	inUse(){
+		if(_.get(this, 'state.error')){ //using lodash here to null check 
+			return <div className="alert alert-danger">That username is already in use.</div>
+		}
+
+	}
 
 	render() {
 		return (
 
 			<div>
 				<h3>Sign Up:</h3>
-				<input type="text" placeholder="Enter username" onChange={(e)=>this.setState({username:e.target.value})} />
-				<input type="password" placeholder="Enter password" onChange={(e)=>this.setState({password:e.target.value})} />
+				{this.noUsernameOrPassword()}
+				{this.inUse()}
+				<input type="text" placeholder="Enter username" onChange={(e)=>this.setState({username:e.target.value})} onKeyPress={this.add.bind(this)} />
+				<input type="password" placeholder="Enter password" onChange={(e)=>this.setState({password:e.target.value})} onKeyPress={this.add.bind(this)} />
 				<button onClick={this.signUp.bind(this)}>Submit</button>
 
 			</div>
@@ -45,6 +78,7 @@ class SignUp extends React.Component{
 
 			)
 	}
+
 
 }
 
