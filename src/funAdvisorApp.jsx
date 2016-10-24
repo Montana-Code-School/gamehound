@@ -16,6 +16,8 @@ class FunAdvisorApp extends React.Component {
         })
     }
 
+    
+
     setLogin(value){
         this.setState({loggedIn: value})
     }
@@ -28,6 +30,7 @@ class FunAdvisorApp extends React.Component {
             return (<div>
                      <Header/>
                      <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
+                     <GameFilter />
                     </div>)
         }
     }

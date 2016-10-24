@@ -30,13 +30,11 @@ class SignUp extends React.Component{
 		
 	}
 
-
 	add(event){
          if(event.charCode === 13){
             this.signUp();
          }
      }
-
 
     setError(value){
     	this.setState({error:value})
