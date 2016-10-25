@@ -22,6 +22,13 @@ module.exports = function(app, passport) {
 			}
 		})
 	})
+
+    app.post('/api/game/recommend', function(req, res){
+        Game.findOne({difficulty:req.body.difficulty},function(err, game){
+                res.json(game)
+        })
+
+    })
     
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/api/user', // redirect to the secure profile section

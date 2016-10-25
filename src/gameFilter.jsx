@@ -21,22 +21,19 @@ class GameFilter extends React.Component {
 		this.setState({type: this.state.type.toggle(newType)})
 	}
 
-	// getGame(){
- //    if(_.get(this, 'state.username') && _.get(this, 'state.password')) {
- //      request('/api/game', "GET", {
- //                                  numPlayers: this.state.numPlayers,
- //                                  password: this.state.password
- //                                  }, 
- //                                 response => {
- //                                  console.log(response.flash)
- //                                  this.setError(response.flash);
- //                                  this.props.setLogin(response.loggedIn);
+	getGame(){
+    
+      request('/api/game/recommend', "POST", {
+                                  difficulty: this.state.difficulty,
+                                  }, 
+                                 response => {
+                                  console.log(response)
+                                  // this.setError(response.flash);
+                                  // this.props.setLogin(response.loggedIn);
 
- //                                  })
- //    } else {
-      
- //    }
- //  }
+                                  })
+    
+  }
 
 
 	render() {
@@ -96,7 +93,7 @@ class GameFilter extends React.Component {
 				 	</div>
 
 				 	<div>
-				 		<button className="btn btn-success" >Fetch Me A Game!</button>
+				 		<button className="btn btn-success" onClick={this.getGame.bind(this)}>Fetch Me A Game!</button>
 				 	</div>
 
 
