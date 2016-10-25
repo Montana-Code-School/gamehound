@@ -3,109 +3,102 @@
 
 import React from 'react';
 import requests from './request.js'
+import _ from 'lodash'
+import ToggleList from './toggleList'
 
 var request = requests.request
 
 class GameFilter extends React.Component {
         		//number of players, type, amount of time, difficulty
 
-  constructor(props) {
-    super(props);
-    this.state = {type: []}
-    // Operations usually carried out in componentWillMount go here
-  }
+	constructor(props) {
+	  super(props);
+	  this.state = {type: new ToggleList()}
+	  // Operations usually carried out in componentWillMount go here
+	}
 
-render() {
-	
+	stateToggler(newType){
+		this.setState({type: this.state.type.toggle(newType)})
+	}
+
+	// getGame(){
+ //    if(_.get(this, 'state.username') && _.get(this, 'state.password')) {
+ //      request('/api/game', "GET", {
+ //                                  numPlayers: this.state.numPlayers,
+ //                                  password: this.state.password
+ //                                  }, 
+ //                                 response => {
+ //                                  console.log(response.flash)
+ //                                  this.setError(response.flash);
+ //                                  this.props.setLogin(response.loggedIn);
+
+ //                                  })
+ //    } else {
+      
+ //    }
+ //  }
 
 
+	render() {
+		var btn = "btn btn-primary";
         return  (<div>
         			<h3>How many people are playing?</h3>
         			<div className="btn-group" data-toggle="buttons">
-					  <label className="btn btn-primary" onClick={()=>this.setState({numPlayers:1})}>
-					    <input type="radio" name="numPlayers" id="1player" autocomplete="off"/>1
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({numPlayers:2})}>
-					    <input type="radio" name="numPlayers" id="2players" autocomplete="off"/>2
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({numPlayers:3})}>
-					    <input type="radio" name="numPlayers" id="3players" autocomplete="off"/>3
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({numPlayers:4})}>
-					    <input type="radio" name="numPlayers" id="4players" autocomplete="off"/>4
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({numPlayers:5})}>
-					    <input type="radio" name="numPlayers" id="5to7players" autocomplete="off"/>5-7
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({numPlayers:8})}>
-					    <input type="radio" name="numPlayers" id="8plusplayers" autocomplete="off"/>8+ 
-					  </label>
-					</div>
+        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
+	        		      var gameLabel = numOfPlayers[0];
+	        		      var num = numOfPlayers[1]
+	        		      return (<label className={btn} key={num} onClick={()=>this.setState({numPlayers:num})}>
+						    <input type="radio" autoComplete="off"/>{gameLabel}
+						  </label>)
+					})}
+				 	</div>
 
 					<h3>What type(s) of game would you like to play?</h3>
 
 					<div className="btn-group" data-toggle="buttons">
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Icebreaker"])})}>
-					    <input type="checkbox" id="icebreaker" autocomplete="off"/> Icebreaker
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Card"])})}>
-					    <input type="checkbox" id="card" autocomplete="off"/>Card
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Dice"])})}>
-					    <input type="checkbox" id="dice" autocomplete="off"/>Dice
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Movement/Improv"])})}>
-					    <input type="checkbox" id="movement-improv" autocomplete="off"/>Movement/Improv
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Party/Group"])})}>
-					    <input type="checkbox" id="party-group" autocomplete="off"/>Party/Group
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Drinking"])})}>
-					    <input type="checkbox" id="drinking" autocomplete="off"/>Drinking
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Roadtrip"])})}>
-					    <input type="checkbox" id="roadtrip" autocomplete="off"/>Roadtrip
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({type:this.state.type.concat(["Thought Provoking/Discussion"])})}>
-					    <input type="checkbox" id="thoughtprovoking-discussion" autocomplete="off"/>Thought Provoking/Discussion
-					  </label>
+					{["Icebreaker", 
+					  'Card', 
+					  'Dice', 
+					  "Movement/Improv", 
+					  "Party/Group", 
+					  "Drinking", 
+					  "Roadtrip", 
+					  "Thought Provoking/Discussion"].map(gameType =>
+					  (<label className={btn} key={gameType} onClick={(e) =>this.stateToggler(gameType)}>
+			    		<input type="checkbox"  autoComplete="off"/> {gameType}
+					  </label>))
+				    }
+		
 					</div>
 
 					<h3>How long would you like the game to be?</h3>
-
+					
 					<div className="btn-group" data-toggle="buttons">
-					  <label className="btn btn-primary" onClick={()=>this.setState({time:5})}>
-					    <input type="checkbox" id="5-10min" autocomplete="off"/> 5-10 minutes
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({time:15})}>
-					    <input type="checkbox" id="15min" autocomplete="off"/>15 minutes
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({time:30})}>
-					    <input type="checkbox" id="30min" autocomplete="off"/>30 minutes
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({time:60})}>
-					    <input type="checkbox" id="1hour" autocomplete="off"/>1 hour
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({time:61})}>
-					    <input type="checkbox" id="1hour-plus" autocomplete="off"/> >1 hour
-					  </label>
-					</div>
-                	
+	        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
+		        		      var gameLabel = time[0];
+		        		      var num = time[1]
+		        		      return (<label className={btn} key={num} onClick={()=>this.setState({time:num})}>
+							    <input type="radio" autoComplete="off"/>{gameLabel}
+							  </label>)
+						})}
+				 	</div>
 
 
                 	<h3>How difficult of a game do you want to play?</h3>
 
-					<div className="btn-group" data-toggle="buttons">
-					  <label className="btn btn-primary" onClick={()=>this.setState({difficulty:"Easy"})}>
-					    <input type="radio" name="difficulty" id="easy" autocomplete="off"/>Easy
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({difficulty:"Medium"})}>
-					    <input type="radio" name="difficulty" id="medium" autocomplete="off"/>Medium
-					  </label>
-					  <label className="btn btn-primary" onClick={()=>this.setState({difficulty:"Hard"})} >
-					    <input type="radio" name="difficulty" id="hard" autocomplete="off"/>Hard
-					  </label>
-					</div>
+                	<div className="btn-group" data-toggle="buttons">
+	        			{['Easy', 'Medium', 'Hard'].map(levelOfDifficulty =>{
+		        	
+		        		      return (<label className={btn} key={levelOfDifficulty} onClick={()=>this.setState({difficulty:levelOfDifficulty})}>
+							    <input type="radio" autoComplete="off"/>{levelOfDifficulty}
+							  </label>)
+						})}
+				 	</div>
+
+				 	<div>
+				 		<button className="btn btn-success" >Fetch Me A Game!</button>
+				 	</div>
+
 
                 </div>)
   }
