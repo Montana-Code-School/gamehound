@@ -7,7 +7,10 @@ var request = requests.request
 class Logout extends React.Component {
 
   logOut(){
-    request('/logout', "GET", null, response => this.props.setLogin(response.loggedIn))
+    request('/logout', "GET", null, response => {
+    	this.props.setLogin(response.loggedIn)
+
+    })
   }
 
   render() {

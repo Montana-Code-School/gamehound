@@ -50,7 +50,7 @@ module.exports = function(app, passport) {
     app.get('/api/user', function(req, res){
         if(req.user){
             res.json({ loggedIn: true, user: req.user, flash: req.flash()})
-        } else {
+        } else { // We have logged out...
             res.json({loggedIn: false, flash: req.flash()})
         }
     })
