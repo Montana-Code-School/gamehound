@@ -8,7 +8,7 @@ class Logout extends React.Component {
 
   logOut(){
     request('/logout', "GET", null, response => {
-    	this.props.setLogin(response.loggedIn)
+    	this.props.setLogin(response)
 
     })
   }

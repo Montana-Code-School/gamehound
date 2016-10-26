@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var gameSchema = mongoose.Schema({
 
 	gameName: String,
-	numPlayers: Number, //how to make a range? 
+	numPlayers: Number, 
 	type: [],
 	time: Number,
 	description: String,

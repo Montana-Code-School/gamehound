@@ -16,7 +16,7 @@ class Login extends React.Component {
                                  response => {
                                   console.log(response.flash)
                                   this.setError(response.flash);
-                                  this.props.setLogin(response.loggedIn);
+                                  this.props.setLogin(response);
 
                                   })
     } else {
