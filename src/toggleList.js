@@ -17,4 +17,9 @@ ToggleList.prototype.toggle = function(item){
 		}
 }
 
+ToggleList.prototype.addToTutorial = function(instruction){
+	return new ToggleList(this.list.concat(instruction));
+}
+
+
 module.exports = ToggleList
