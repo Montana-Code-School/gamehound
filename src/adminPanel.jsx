@@ -34,21 +34,29 @@ class AdminPanel extends React.Component{
 				)
 	}
 
+	add(event){
+         if(event.charCode === 13){
+            event.preventDefault()
+            this.tutorialToggler(this.state.instruction);
+         }
+    }
 
 	stateToggler(newType){
 		this.setState({type: this.state.type.toggle(newType)})
 	}
 
 	tutorialToggler(instruction){
+		this.refs.instructionText.value = "";
 		this.setState({tutorial: this.state.tutorial.addToTutorial(instruction)});
 	}
 
 	mapInstructions(){
 		const instructions = _.get(this, 'state.tutorial.list')
 		if(instructions.length !== 0) {
-			return instructions.map(instruction => <li key={instruction} >{instruction}</li>)
+			return instructions.map(instruction => <li>{instruction}</li>)
 		}
 	}
+
 
 
 	render(){
@@ -125,7 +133,7 @@ class AdminPanel extends React.Component{
 					 		<ol>
 					 		{this.mapInstructions()}
 					 		</ol>
-					 		<textarea onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50"></textarea>
+					 		<textarea ref="instructionText" onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50" onKeyPress={this.add.bind(this)}></textarea>
 					 		<button className="btn btn-success" onClick={()=>this.tutorialToggler(this.state.instruction)}>Add Instruction</button>
 					 	</div>
 
