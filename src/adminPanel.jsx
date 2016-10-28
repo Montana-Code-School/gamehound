@@ -14,7 +14,9 @@ class AdminPanel extends React.Component{
 	  this.state = {gamePostSuccess: false,
 	  				type: new ToggleList(),
 	  				tutorial: new ToggleList(),
-	  				instruction: new ToggleList()
+	  				instruction: new ToggleList(),
+	  				numPlayers: new ToggleList(),
+	  				itemsNeeded: new ToggleList()
 	  				}
 
 	}
@@ -30,31 +32,38 @@ class AdminPanel extends React.Component{
 										tutorial: this.state.tutorial,
 										rating: this.state.rating,
 										difficulty: this.state.difficulty
-										}, () => {this.setState({gamePostSuccess: true})}
+										}, () => {this.setState({gamePostSuccess: true,
+																 tutorial:new ToggleList})}
 				)
 	}
 
-	add(event){
+	add(event, newInput, stateName){ // Fix this!!!! 
          if(event.charCode === 13){
             event.preventDefault()
-            this.tutorialToggler(this.state.instruction);
+            this.stateToggler(this.state.newInput, stateName);
          }
     }
 
-	stateToggler(newType){
-		this.setState({type: this.state.type.toggle(newType)})
-	}
-
-	tutorialToggler(instruction){
-		this.refs.instructionText.value = "";
-		this.setState({tutorial: this.state.tutorial.addToTutorial(instruction)});
-	}
-
-	mapInstructions(){
-		const instructions = _.get(this, 'state.tutorial.list')
-		if(instructions.length !== 0) {
-			return instructions.map(instruction => <li>{instruction}</li>)
+	stateToggler(newInput, stateName){ /// Need to address bug from refactored state toggler... 
+		if(this.refs.textareaInput){
+			this.refs.textareaInput.value = "";
+			this.setState({stateName: 'this.state.' + stateName + 'addToTextList(newInput)'})
+		} else {
+			this.setState({stateName: this.state.stateName.toggle(newInput)})
 		}
+	}
+
+	mapTextList(stateName){ // Probably a problem here too...
+		var arraysToMap = 'state.' + stateName + '.list'
+		const textList = _.get(this, arraysToMap)
+		if(textList.length !== 0) {
+			return textList.map(text => <li>{text}</li>)
+		}
+	}
+
+
+	clearState() {
+		this.setState({tutorial:new ToggleList()})
 	}
 
 
@@ -77,8 +86,8 @@ class AdminPanel extends React.Component{
 		        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
 			        		      var gameLabel = numOfPlayers[0];
 			        		      var num = numOfPlayers[1]
-			        		      return (<label className={btn} key={num} onClick={()=>this.setState({numPlayers:num})}>
-								    <input type="radio" autoComplete="off"/>{gameLabel}
+			        		      return (<label className={btn} key={num} onClick={()=>this.stateToggler(num, numPlayers)}>
+								    <input type="checkbox" autoComplete="off"/>{gameLabel}
 								  </label>)
 							})}
 					 	</div>
@@ -96,7 +105,7 @@ class AdminPanel extends React.Component{
 						  "Drinking", 
 						  "Roadtrip", 
 						  "Thought Provoking/Discussion"].map(gameType =>
-						  (<label className={btn} key={gameType} onClick={(e) =>this.stateToggler(gameType)}>
+						  (<label className={btn} key={gameType} onClick={(e) =>this.stateToggler(gameType, type)}>
 				    		<input type="checkbox"  autoComplete="off"/> {gameType}
 						  </label>))
 					    }
@@ -124,17 +133,21 @@ class AdminPanel extends React.Component{
 					 	<h3>Items Needed</h3>
 
 					 	<div>
-					 		<input type="text" onChange={(e)=>this.setState({itemsNeeded:e.target.value})} />
+					 		<ul>
+					 		{this.mapTextList('itemsNeeded')}
+					 		</ul>
+					 		<input type="text" ref="textareaInput" onChange={(e)=>this.setState({item:e.target.value})} onKeyPress={this.add.bind(this)}/>
+					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, itemsNeeded)}>Add Item</button>
 					 	</div>
 
 					 	<h3>Tutorial</h3>
 
 					 	<div>
 					 		<ol>
-					 		{this.mapInstructions()}
+					 		{this.mapTextList('tutorial')}
 					 		</ol>
-					 		<textarea ref="instructionText" onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50" onKeyPress={this.add.bind(this)}></textarea>
-					 		<button className="btn btn-success" onClick={()=>this.tutorialToggler(this.state.instruction)}>Add Instruction</button>
+					 		<textarea ref="textareaInput" onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50" onKeyPress={this.add.bind(this)}></textarea>
+					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, tutorial)}>Add Instruction</button>
 					 	</div>
 
 					 	<h3>Rating</h3>
@@ -160,7 +173,9 @@ class AdminPanel extends React.Component{
 					 	</div>
 
 					 	<div>
-					 		<button className="btn btn-success" onClick={this.createGame.bind(this)}>BASSET HOUNDS DROOL</button>
+					 		<button className="btn btn-success" onClick={this.createGame.bind(this)}>Submit Game</button>
+					 		<button className="btn btn-warning" onClick={()=>this.setState({tutorial: new ToggleList()})}>Clear Everything Forever</button>
+
 					 	</div>
 					 	
 

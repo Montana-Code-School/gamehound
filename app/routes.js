@@ -5,12 +5,12 @@ module.exports = function(app, passport) {
 	app.post('/api/game', function (req, res) {
 		new Game({
 		gameName: req.body.gameName,
-		numPlayers: req.body.numPlayers,
-		type: req.body.type, //needs to be array
+		numPlayers: req.body.numPlayers.list, //needs to be array
+		type: req.body.type.list, //needs to be array
 		time: req.body.time,
 		description: req.body.description,
-		itemsNeeded: req.body.itemsNeeded, //needs to be array
-		tutorial: req.body.tutorial, //needs to be array
+		itemsNeeded: req.body.itemsNeeded.list, //needs to be array
+		tutorial: req.body.tutorial.list, //needs to be array
 		rating: req.body.rating, 
 		difficulty: req.body.difficulty
 		})
