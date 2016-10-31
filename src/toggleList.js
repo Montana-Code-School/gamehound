@@ -17,8 +17,8 @@ ToggleList.prototype.toggle = function(item){
 		}
 }
 
-ToggleList.prototype.addToTextList = function(instruction){
-	return new ToggleList(this.list.concat(instruction));
+ToggleList.prototype.addToTextList = function(newInput){
+	return new ToggleList(this.list.concat(newInput));
 }
 
 

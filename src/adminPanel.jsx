@@ -5,7 +5,6 @@ import ToggleList from './toggleList'
 import _ from 'lodash'
 
 var request = requests.request
-//hi
 
 class AdminPanel extends React.Component{
 
@@ -18,38 +17,50 @@ class AdminPanel extends React.Component{
 	  				numPlayers: new ToggleList(),
 	  				itemsNeeded: new ToggleList()
 	  				}
-
 	}
 
 	createGame() {
 		request('/api/game', 'POST', {
-										gameName: this.state.gameName,
-										numPlayers: this.state.numPlayers, 
-										type: this.state.type,
-										time: this.state.time,
-										description: this.state.description,
-										itemsNeeded: this.state.itemsNeeded,
-										tutorial: this.state.tutorial,
-										rating: this.state.rating,
-										difficulty: this.state.difficulty
-										}, () => {this.setState({gamePostSuccess: true,
-																 tutorial:new ToggleList})}
+			gameName: this.state.gameName,
+			numPlayers: this.state.numPlayers, 
+			type: this.state.type,
+			time: this.state.time,
+			description: this.state.description,
+			itemsNeeded: this.state.itemsNeeded,
+			tutorial: this.state.tutorial,
+			rating: this.state.rating,
+			difficulty: this.state.difficulty
+			}, () => {this.setState({gamePostSuccess: true,
+									 tutorial:new ToggleList(),
+									 itemsNeeded:new ToggleList()})}
 				)
 	}
 
-	add(event, newInput, stateName){ // Fix this!!!! 
-         if(event.charCode === 13){
+	add(event){ // This definitely needs some work, currently nonfunctioning 
+		console.log("does this happen first?")
+         if(event.charCode === 13 && this.state.item){
             event.preventDefault()
-            this.stateToggler(this.state.newInput, stateName);
+            this.stateToggler(this.state.item, "itemsNeeded");
+            console.log("we made it down here")
+         } else if (event.charCode === 13 && this.state.instruction){
+            event.preventDefault()
+            this.stateToggler(this.state.instruction, "tutorial");
+            console.log("we made it in the second else statement")
          }
     }
 
-	stateToggler(newInput, stateName){ /// Need to address bug from refactored state toggler... 
-		if(this.refs.textareaInput){
+	stateToggler(newInput, stateName){
+		var stateUpdate = {}
+		if(stateName === "tutorial" || stateName === "itemsNeeded"){ // this is hard coded... is there a better way? 
+			console.log(this.state.item)
 			this.refs.textareaInput.value = "";
-			this.setState({stateName: 'this.state.' + stateName + 'addToTextList(newInput)'})
+			console.log("we made it past the setting the value blank")
+			stateUpdate[stateName] = this.state[stateName].addToTextList(newInput)
+			this.setState(stateUpdate)
+
 		} else {
-			this.setState({stateName: this.state.stateName.toggle(newInput)})
+			stateUpdate[stateName] = this.state[stateName].toggle(newInput)
+			this.setState(stateUpdate)
 		}
 	}
 
@@ -61,32 +72,29 @@ class AdminPanel extends React.Component{
 		}
 	}
 
-
 	clearState() {
-		this.setState({tutorial:new ToggleList()})
+		this.setState({tutorial:new ToggleList(),
+					   itemsNeeded: new ToggleList()})
 	}
-
-
 
 	render(){
 		var btn = "btn btn-primary";
-
 		if(!this.state.gamePostSuccess){
-	        return  (<div>
+	        return  (<div className="container">
 
-	        			<h3>Game Name</h3>
+	        			<h2>Game Name</h2>
 	        				<div>
 	        					<input type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
 	        				</div>
 
 
-	        			<h3>Number of Players</h3>
+	        			<h2>Number of Players</h2>
 
 	        			<div className="btn-group" data-toggle="buttons">
 		        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
 			        		      var gameLabel = numOfPlayers[0];
 			        		      var num = numOfPlayers[1]
-			        		      return (<label className={btn} key={num} onClick={()=>this.stateToggler(num, numPlayers)}>
+			        		      return (<label className={btn} key={num} onClick={()=>this.stateToggler(num, 'numPlayers')}>
 								    <input type="checkbox" autoComplete="off"/>{gameLabel}
 								  </label>)
 							})}
@@ -94,7 +102,7 @@ class AdminPanel extends React.Component{
 
 
 
-						<h3>Type</h3>
+						<h2>Type</h2>
 
 						<div className="btn-group" data-toggle="buttons">
 						{["Icebreaker", 
@@ -105,14 +113,14 @@ class AdminPanel extends React.Component{
 						  "Drinking", 
 						  "Roadtrip", 
 						  "Thought Provoking/Discussion"].map(gameType =>
-						  (<label className={btn} key={gameType} onClick={(e) =>this.stateToggler(gameType, type)}>
+						  (<label className={btn} key={gameType} onClick={(e)=>this.stateToggler(gameType, 'type')}>
 				    		<input type="checkbox"  autoComplete="off"/> {gameType}
 						  </label>))
 					    }
 			
 						</div>
 
-						<h3>Length</h3>
+						<h2>Length</h2>
 						
 						<div className="btn-group" data-toggle="buttons">
 		        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
@@ -124,35 +132,34 @@ class AdminPanel extends React.Component{
 							})}
 					 	</div>
 
-					 	<h3>Description</h3>
+					 	<h2>Description</h2>
 
 					 	<div>
 					 		<textarea onChange={(e)=>this.setState({description:e.target.value})}></textarea>
 					 	</div>
 
-					 	<h3>Items Needed</h3>
+					 	<h2>Items Needed</h2>
 
 					 	<div>
 					 		<ul>
 					 		{this.mapTextList('itemsNeeded')}
 					 		</ul>
 					 		<input type="text" ref="textareaInput" onChange={(e)=>this.setState({item:e.target.value})} onKeyPress={this.add.bind(this)}/>
-					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, itemsNeeded)}>Add Item</button>
+					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
 					 	</div>
 
-					 	<h3>Tutorial</h3>
+					 	<h2>Tutorial</h2>
 
 					 	<div>
 					 		<ol>
 					 		{this.mapTextList('tutorial')}
 					 		</ol>
 					 		<textarea ref="textareaInput" onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50" onKeyPress={this.add.bind(this)}></textarea>
-					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, tutorial)}>Add Instruction</button>
+					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
 					 	</div>
 
-					 	<h3>Rating</h3>
+					 	<h2>Rating</h2>
 					 		<select onChange={(e)=>this.setState({rating:e.target.value})}>
-
 							  <option value="0" > </option>
 							  <option value="5" >5</option>
 							  <option value="4">4</option>
@@ -161,7 +168,7 @@ class AdminPanel extends React.Component{
 							  <option value="1">1</option>
 							</select>
 
-	                	<h3>Difficulty</h3>
+	                	<h2>Difficulty</h2>
 
 	                	<div className="btn-group" data-toggle="buttons">
 		        			{['Easy', 'Medium', 'Hard'].map(levelOfDifficulty =>{
@@ -174,18 +181,15 @@ class AdminPanel extends React.Component{
 
 					 	<div>
 					 		<button className="btn btn-success" onClick={this.createGame.bind(this)}>Submit Game</button>
-					 		<button className="btn btn-warning" onClick={()=>this.setState({tutorial: new ToggleList()})}>Clear Everything Forever</button>
+					 		<button className="btn btn-warning" onClick={()=>this.setState({tutorial: new ToggleList})}>Clear Everything Forever</button>
 
 					 	</div>
-					 	
-
 	                </div>)
 	    } else {
 	    	return (<div>
-	    				<h3>Congrats! You have submitted a game!</h3>
+	    				<h2>Congrats! You have submitted a game!</h2>
 	    				<button className="btn btn-success" onClick={()=>this.setState({gamePostSuccess: false})}>Create Another Game</button>
-	    			</div>
-	    		)
+	    			</div>)
 	    }
 	}
 

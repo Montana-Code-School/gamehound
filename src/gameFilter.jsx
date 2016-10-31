@@ -38,8 +38,8 @@ class GameFilter extends React.Component {
 
 	render() {
 		var btn = "btn btn-primary";
-        return  (<div>
-        			<h3>How many people are playing?</h3>
+        return  (<div className="container">
+        			<h2>How many people are playing?</h2>
         			<div className="btn-group" data-toggle="buttons">
         			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
 	        		      var gameLabel = numOfPlayers[0];
@@ -50,7 +50,7 @@ class GameFilter extends React.Component {
 					})}
 				 	</div>
 
-					<h3>What type(s) of game would you like to play?</h3>
+					<h2>What type(s) of game would you like to play?</h2>
 
 					<div className="btn-group" data-toggle="buttons">
 					{["Icebreaker", 
@@ -68,7 +68,7 @@ class GameFilter extends React.Component {
 		
 					</div>
 
-					<h3>How long would you like the game to be?</h3>
+					<h2>How long would you like the game to be?</h2>
 					
 					<div className="btn-group" data-toggle="buttons">
 	        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
@@ -81,7 +81,7 @@ class GameFilter extends React.Component {
 				 	</div>
 
 
-                	<h3>How difficult of a game do you want to play?</h3>
+                	<h2>How difficult of a game do you want to play?</h2>
 
                 	<div className="btn-group" data-toggle="buttons">
 	        			{['Easy', 'Medium', 'Hard'].map(levelOfDifficulty =>{

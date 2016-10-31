@@ -8,8 +8,7 @@ class UserManagement extends React.Component {
  	render(){
  		if (!this.props.loggedIn){
             return (<div>
-                     <Login setLogin={this.props.setLogin}/>
-                     <SignUp setLogin={this.props.setLogin}/>
+                     <Login setLogin={this.props.setLogin} style={{flexDirection:'row'}} /><SignUp setLogin={this.props.setLogin} style={{flexDirection:'row'}}/>
                     </div>)
         } else {
             return (<div> 

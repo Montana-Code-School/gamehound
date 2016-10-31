@@ -57,13 +57,13 @@ class Login extends React.Component {
   render() {
     return (
 
-      <div>
+      <div className="container">
         <h3>Log In:</h3>
         {this.noUsernameOrPassword()}
         {this.wrongPassword()}
         <input type="text" placeholder="Enter username" onChange={(e)=>this.setState({username:e.target.value})} onKeyPress={this.add.bind(this)} />
         <input type="password" placeholder="Enter password" onChange={(e)=>this.setState({password:e.target.value})} onKeyPress={this.add.bind(this)} />
-        <button onClick={this.logIn.bind(this)}>Submit</button>
+        <button className="btn btn-success" onClick={this.logIn.bind(this)}>Submit</button>
       </div>
       )
   }

@@ -1,0 +1,42 @@
+* {
+	font-family:'Noto Sans',sans-serif;
+}
+
+body {
+	background:#fff;
+}
+
+.btn-primary {
+	margin: 15px;
+	background:#565656;
+	border:1px #888;
+	padding:10px;
+}
+
+.btn-success {
+	font-size:1.1em;
+	background:#10323f;
+	border:1px #888;
+}
+
+.btn-success:hover {
+	font-size:1.1em;
+	background:#76320a;
+	border:1px #888;
+
+}
+
+h1 {
+	font-family:'Lora',serif;
+	font-size:4.1em;
+	font-weight:bold;
+
+}
+
+h2 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:1.6em;
+}
