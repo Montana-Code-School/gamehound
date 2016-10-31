@@ -25,8 +25,13 @@ class GameFilter extends React.Component {
     
       request('/api/game/recommend', "POST", {
                                   difficulty: this.state.difficulty,
+                                  type: this.state.type,
+                                  numPlayers: this.state.numPlayers,
+                                  time: this.state.time
+
                                   }, 
                                  response => {
+
                                   console.log(response)
                                   // this.setError(response.flash);
                                   // this.props.setLogin(response.loggedIn);

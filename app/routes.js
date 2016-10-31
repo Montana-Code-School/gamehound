@@ -24,8 +24,12 @@ module.exports = function(app, passport) {
 	})
 
     app.post('/api/game/recommend', function(req, res){
-        Game.findOne({difficulty:req.body.difficulty},function(err, game){
-                res.json(game)
+        Game.createFilterScore({difficulty:req.body.difficulty,
+            type:req.body.type.list,
+            numPlayers:req.body.numPlayers,
+            time:req.body.time}
+            ,function(err, filteredList){
+                res.json(filteredList)
         })
 
     })

@@ -36,24 +36,24 @@ class AdminPanel extends React.Component{
 				)
 	}
 
-	add(event){ // This definitely needs some work, currently nonfunctioning 
-		console.log("does this happen first?")
-         if(event.charCode === 13 && this.state.item){
-            event.preventDefault()
-            this.stateToggler(this.state.item, "itemsNeeded");
-            console.log("we made it down here")
-         } else if (event.charCode === 13 && this.state.instruction){
-            event.preventDefault()
-            this.stateToggler(this.state.instruction, "tutorial");
-            console.log("we made it in the second else statement")
-         }
-    }
+// This definitely needs some work, currently nonfunctioning. For HTML fields key: "value",  onKeyPress={this.add.bind(this)}
+	// add(event){ 
+	// 	console.log("does this happen first?")
+ //         if(event.charCode === 13){
+ //            event.preventDefault()
+ //            this.stateToggler(this.state.item, "itemsNeeded");
+ //            console.log("we made it down here")
+ //         } else if (event.charCode === 13 && this.state.instruction){
+ //            event.preventDefault()
+ //            this.stateToggler(this.state.instruction, "tutorial");
+ //            console.log("we made it in the second else statement")
+ //         }
+ //    }
 
 	stateToggler(newInput, stateName){
 		var stateUpdate = {}
 		if(stateName === "tutorial" || stateName === "itemsNeeded"){ // this is hard coded... is there a better way? 
-			console.log(this.state.item)
-			this.refs.textareaInput.value = "";
+			stateName === "tutorial" ? this.refs.tutorial.value = "" : this.refs.itemsNeeded.value = "" // this needs to change if you add more states to this function
 			console.log("we made it past the setting the value blank")
 			stateUpdate[stateName] = this.state[stateName].addToTextList(newInput)
 			this.setState(stateUpdate)
@@ -64,7 +64,7 @@ class AdminPanel extends React.Component{
 		}
 	}
 
-	mapTextList(stateName){ // Probably a problem here too...
+	mapTextList(stateName){ 
 		var arraysToMap = 'state.' + stateName + '.list'
 		const textList = _.get(this, arraysToMap)
 		if(textList.length !== 0) {
@@ -144,7 +144,7 @@ class AdminPanel extends React.Component{
 					 		<ul>
 					 		{this.mapTextList('itemsNeeded')}
 					 		</ul>
-					 		<input type="text" ref="textareaInput" onChange={(e)=>this.setState({item:e.target.value})} onKeyPress={this.add.bind(this)}/>
+					 		<textarea ref="itemsNeeded" onChange={(e)=>this.setState({item:e.target.value})} cols="25"></textarea>
 					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
 					 	</div>
 
@@ -154,7 +154,7 @@ class AdminPanel extends React.Component{
 					 		<ol>
 					 		{this.mapTextList('tutorial')}
 					 		</ol>
-					 		<textarea ref="textareaInput" onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50" onKeyPress={this.add.bind(this)}></textarea>
+					 		<textarea ref="tutorial" onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50"></textarea>
 					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
 					 	</div>
 
