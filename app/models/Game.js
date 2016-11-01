@@ -1,3 +1,4 @@
+var _ = require('lodash')
 var mongoose = require('mongoose');
 
 var gameSchema = mongoose.Schema({
@@ -16,43 +17,102 @@ var gameSchema = mongoose.Schema({
 //write filter methods here to pick user game
 													
 gameSchema.statics.createFilterScore = function(userInput, callback) {
-	
 
-
-
-
-	// var thirdMatches = [correlationArray[perfectMatchIndex+2], correlationArray[perfectMatchIndex-2], .25 ]
-	this.find(games, function(err, games) {
-		if (err) {
-			throw err
-		} else {
-			
-		}
-	}) 
 }
 
 function arrDistance(arr, input1, input2){
 	return Math.abs(arr.indexOf(input1) - arr.indexOf(input2))
 }
 
+var gameTypeScores = 
+	{Dice:
+		{Dice:1,
+		Card:.75,
+		Drinking:.5,
+		'Party/Game':.5,
+		Icebreaker:.5,
+		'Movement/Improv':0,
+		'Thought Provoking/Discussion':0,
+		Roadtrip:0},
 
-function typeScoreCalc(userType, gameTypeArr) {
-	var score = 0
-	var diceCards = ["Dice", "Card"]
-	var partyGames = ["Drinking", "Party/Group", "Icebreaker", "Movement/Improv"]
-	var thinkingGames = ["Thought Provoking/Discussion", "Roadtrip"]
-	for (var i=0; i<userType.length; i++) {
-		if (gameTypeArr.indexOf(userType[i]) !== -1) {
-			score++
-		} else if (userType[i]) {}
-		// Within same group = .75
-		// Dice vs Party = .5
-		// Thinking vs Everything = 0
-		}
+	Card:
+		{Dice:.75,
+		Card:1,
+		Drinking:.5,
+		'Party/Game':.5,
+		Icebreaker:.5,
+		'Movement/Improv':0,
+		'Thought Provoking/Discussion':0,
+		Roadtrip:0},
 
+	Drinking:
+		{Dice:.5,
+		Card:.5,
+		Drinking:1,
+		'Party/Game':.75,
+		Icebreaker:.5,
+		'Movement/Improv':.75,
+		'Thought Provoking/Discussion':0,
+		Roadtrip:0},
 
-	
-	return score
+	'Party/Game':
+		{Dice:.5,
+		Card:.5,
+		Drinking:.75,
+		'Party/Game':1,
+		Icebreaker:.75,
+		'Movement/Improv':.75,
+		'Thought Provoking/Discussion':.5,
+		Roadtrip:0},
+
+	Icebreaker:
+		{Dice:0,
+		Card:0,
+		Drinking:.75,
+		'Party/Game':.75,
+		Icebreaker:1,
+		'Movement/Improv':.75,
+		'Thought Provoking/Discussion':.5,
+		Roadtrip:0},
+
+	'Movement/Improv':
+		{Dice:0,
+		Card:0,
+		Drinking:.75,
+		'Party/Game':.75,
+		Icebreaker:.75,
+		'Movement/Improv':1,
+		'Thought Provoking/Discussion':.5,
+		Roadtrip:0},
+
+	'Thought Provoking/Discussion':
+		{Dice:0,
+		Card:0,
+		Drinking:0,
+		'Party/Game':.5,
+		Icebreaker:.5,
+		'Movement/Improv':.5,
+		'Thought Provoking/Discussion':1,
+		Roadtrip:.75},
+
+	Roadtrip:
+		{Dice:0,
+		Card:0,
+		Drinking:0,
+		'Party/Game':0,
+		Icebreaker:0,
+		'Movement/Improv':0,
+		'Thought Provoking/Discussion':.75,
+		Roadtrip:1}
+	}
+
+function typeScoreCalc(userType, gameTypeArr) { //always call with bracket notation because of spec chars
+	var score = userType.map(function(userChoice){
+		return gameTypeArr.map(function(gameChoice){
+			return gameTypeScores[userChoice][gameChoice]
+		})
+	})	
+	return Math.max(..._.flatten(score))
 }
 
 
@@ -87,6 +147,8 @@ function scoreGame(difficulty, numPlayers, time, type, game) {
 	} else if (timeScore === 2) {
 		score += .1
 	}
+
+	return score/4
 }
 
 	
