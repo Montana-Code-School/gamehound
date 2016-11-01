@@ -126,6 +126,7 @@ class AdminPanel extends React.Component{
 		        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
 			        		      var gameLabel = time[0];
 			        		      var num = time[1]
+			        		      // Here is an awesome comment
 			        		      return (<label className={btn} key={num} onClick={()=>this.setState({time:num})}>
 								    <input type="radio" autoComplete="off"/>{gameLabel}
 								  </label>)
