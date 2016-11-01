@@ -13,7 +13,8 @@ class GameFilter extends React.Component {
 
 	constructor(props) {
 	  super(props);
-	  this.state = {type: new ToggleList()}
+	  this.state = {type: new ToggleList(),
+	  				renderedGames: null }
 	  // Operations usually carried out in componentWillMount go here
 	}
 
@@ -32,18 +33,35 @@ class GameFilter extends React.Component {
                                   }, 
                                  response => {
 
-                                  console.log(response)
-                                  // this.setError(response.flash);
-                                  // this.props.setLogin(response.loggedIn);
+                                  this.setState({renderedGames:response})
 
                                   })
     
-  }
+  	}
+
+  	dontShowEmpty(prop){ //Can maybe use to generalize if needed? 
+  		if(prop.length !== 0){
+  			return (<li className="list-group-item"><h3>Items Needed:</h3> <h4>{prop}</h4></li>)
+  		}
+  	}
 
 
 	render() {
 		var btn = "btn btn-primary";
-        return  (<div className="container">
+        	if(this.state.renderedGames){
+        		return (
+        			<div>
+        			<ul className="list-group">
+        				{this.state.renderedGames.map(game => (<div><li className="list-group-item"><h3>Name:</h3> <h4>{game.gameName}</h4></li>
+        													   		<li className="list-group-item"><h3>Percent Match:</h3> <h4>{game.totalScore}%</h4></li>
+        													   	    <li className="list-group-item"><h3>Description:</h3> <h4>{game.description}</h4></li>
+        													   	    {this.dontShowEmpty(game.itemsNeeded.join(", "))}
+        													   	    <li className="list-group-item"><h3>Type:</h3> <h4>{game.type.join(", ")}</h4></li>
+        													   </div>))}
+        			</ul>
+        			</div>)
+        	} else {
+        		return (<div className="container">
         			<h2>How many people are playing?</h2>
         			<div className="btn-group" data-toggle="buttons">
         			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
@@ -100,11 +118,9 @@ class GameFilter extends React.Component {
 				 	<div>
 				 		<button className="btn btn-success" onClick={this.getGame.bind(this)}>Fetch Me A Game!</button>
 				 	</div>
-
-
                 </div>)
-  }
-
+  		}		
+  	}
 
 }
 

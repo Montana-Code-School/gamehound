@@ -17,7 +17,19 @@ var gameSchema = mongoose.Schema({
 //write filter methods here to pick user game
 													
 gameSchema.statics.createFilterScore = function(userInput, callback) {
+	this.find(function(err, games) {
 
+		if (err) {
+			callback(err)
+		} else {
+			var sortedGames = games.map(function(game) {
+				return scoreGame(userInput.difficulty, userInput.numPlayers, userInput.time, userInput.type, game)
+			}).sort(function(game1, game2) {
+				return game2.totalScore - game1.totalScore
+			})
+			callback(null, sortedGames)
+		}
+	})
 }
 
 function arrDistance(arr, input1, input2){
@@ -29,7 +41,7 @@ var gameTypeScores =
 		{Dice:1,
 		Card:.75,
 		Drinking:.5,
-		'Party/Game':.5,
+		'Party/Group':.5,
 		Icebreaker:.5,
 		'Movement/Improv':0,
 		'Thought Provoking/Discussion':0,
@@ -39,7 +51,7 @@ var gameTypeScores =
 		{Dice:.75,
 		Card:1,
 		Drinking:.5,
-		'Party/Game':.5,
+		'Party/Group':.5,
 		Icebreaker:.5,
 		'Movement/Improv':0,
 		'Thought Provoking/Discussion':0,
@@ -49,17 +61,17 @@ var gameTypeScores =
 		{Dice:.5,
 		Card:.5,
 		Drinking:1,
-		'Party/Game':.75,
+		'Party/Group':.75,
 		Icebreaker:.5,
 		'Movement/Improv':.75,
 		'Thought Provoking/Discussion':0,
 		Roadtrip:0},
 
-	'Party/Game':
+	'Party/Group':
 		{Dice:.5,
 		Card:.5,
 		Drinking:.75,
-		'Party/Game':1,
+		'Party/Group':1,
 		Icebreaker:.75,
 		'Movement/Improv':.75,
 		'Thought Provoking/Discussion':.5,
@@ -69,7 +81,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:.75,
-		'Party/Game':.75,
+		'Party/Group':.75,
 		Icebreaker:1,
 		'Movement/Improv':.75,
 		'Thought Provoking/Discussion':.5,
@@ -79,7 +91,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:.75,
-		'Party/Game':.75,
+		'Party/Group':.75,
 		Icebreaker:.75,
 		'Movement/Improv':1,
 		'Thought Provoking/Discussion':.5,
@@ -89,7 +101,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:0,
-		'Party/Game':.5,
+		'Party/Group':.5,
 		Icebreaker:.5,
 		'Movement/Improv':.5,
 		'Thought Provoking/Discussion':1,
@@ -99,7 +111,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:0,
-		'Party/Game':0,
+		'Party/Group':0,
 		Icebreaker:0,
 		'Movement/Improv':0,
 		'Thought Provoking/Discussion':.75,
@@ -111,8 +123,9 @@ function typeScoreCalc(userType, gameTypeArr) { //always call with bracket notat
 		return gameTypeArr.map(function(gameChoice){
 			return gameTypeScores[userChoice][gameChoice]
 		})
+		.filter(result => result !== undefined)
 	})	
-	return Math.max(..._.flatten(score))
+	return Math.max(..._.flatten(score)) || 0
 }
 
 
@@ -148,7 +161,10 @@ function scoreGame(difficulty, numPlayers, time, type, game) {
 		score += .1
 	}
 
-	return score/4
+	score = Math.round(score/4*100)
+	game = game.toObject()
+	game.totalScore = score
+	return game
 }
 
 	

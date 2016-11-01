@@ -34,6 +34,11 @@ class FunAdvisorApp extends React.Component {
             this.setState({funAdvUsername: response.user.username})
         }
     }
+
+    refreshStories(){
+        request('/api/game/recommend', 'GET', null, response => 
+            this.setState({stories: response}))
+    }
     
     render() {
 
@@ -49,7 +54,7 @@ class FunAdvisorApp extends React.Component {
             return (<div>
                      <Header/>
                      <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-                     <GameFilter />
+                     <GameFilter renderedGameProp={this.state.renderedGames}/>
                     </div>)
         }
     }
