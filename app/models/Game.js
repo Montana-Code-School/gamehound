@@ -33,7 +33,9 @@ gameSchema.statics.createFilterScore = function(userInput, callback) {
 }
 
 function arrDistance(arr, input1, input2){
-	return Math.abs(arr.indexOf(input1) - arr.indexOf(input2))
+	if(input1 !== undefined && input2 !== undefined){
+		return Math.abs(arr.indexOf(input1) - arr.indexOf(input2))
+	}
 }
 
 var gameTypeScores = 
@@ -132,13 +134,14 @@ function typeScoreCalc(userType, gameTypeArr) { //always call with bracket notat
 function scoreGame(difficulty, numPlayers, time, type, game) {
 	var typeScore = typeScoreCalc(type, game.type)
 	var score = 0 + typeScore
+	
 	var difficultiesArr = ["Easy", "Medium", "Hard"]
 	var numPlayersArr = [1,2,3,4,5,8]
 	var timesArr = [5,15,30,60,61]
 	var difficultyScore = arrDistance(difficultiesArr, difficulty, game.difficulty)
 	var numPlayersScore  = arrDistance(numPlayersArr, numPlayers, game.numPlayers)
 	var timeScore = arrDistance(timesArr, time, game.time)
-	
+
 	if (difficultyScore === 0) {
 		score++
 	} else if (difficultyScore === 1) {
@@ -160,8 +163,16 @@ function scoreGame(difficulty, numPlayers, time, type, game) {
 	} else if (timeScore === 2) {
 		score += .1
 	}
+	
+	var inputCount = 0
+	for(var i = 0; i <= 3; i++){
+		var newI = i.toString()
+		if(arguments[newI]){
+			inputCount++
+		}
+	}
 
-	score = Math.round(score/4*100)
+	score = Math.round((score/inputCount)*100)
 	game = game.toObject()
 	game.totalScore = score
 	return game
