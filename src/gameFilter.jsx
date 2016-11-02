@@ -6,6 +6,13 @@ import requests from './request.js'
 import _ from 'lodash'
 import ToggleList from './toggleList'
 
+import { ButtonGroup, Button } from 'react-bootstrap';
+
+var ReactBtn = require('react-btn-checkbox');
+var Checkbox = ReactBtn.Checkbox;
+var Radio = ReactBtn.Radio;
+
+
 var request = requests.request
 
 class GameFilter extends React.Component {
@@ -47,35 +54,32 @@ class GameFilter extends React.Component {
 
 
 	render() {
-		var btn = "btn btn-primary";
         	if(this.state.renderedGames){
         		return (
         			<div>
-        			<ul className="list-group">
-        				{this.state.renderedGames.map(game => (<div><li className="list-group-item"><h3>Name:</h3> <h4>{game.gameName}</h4></li>
-        													   		<li className="list-group-item"><h3>Percent Match:</h3> <h4>{game.totalScore}%</h4></li>
-        													   	    <li className="list-group-item"><h3>Description:</h3> <h4>{game.description}</h4></li>
-        													   	    {this.dontShowEmpty(game.itemsNeeded.join(", "))}
-        													   	    <li className="list-group-item"><h3>Type:</h3> <h4>{game.type.join(", ")}</h4></li>
-        													   </div>))}
-        			</ul>
+	        			<ul className="list-group">
+	        				{this.state.renderedGames.map(game => (<div><li className="list-group-item"><h3>Name:</h3> <h4>{game.gameName}</h4></li>
+	        													   		<li className="list-group-item"><h3>Percent Match:</h3> <h4>{game.totalScore}%</h4></li>
+	        													   	    <li className="list-group-item"><h3>Description:</h3> <h4>{game.description}</h4></li>
+	        													   	    {this.dontShowEmpty(game.itemsNeeded.join(", "))}
+	        													   	    <li className="list-group-item"><h3>Type:</h3> <h4>{game.type.join(", ")}</h4></li>
+	        													   </div>))}
+	        			</ul>
         			</div>)
         	} else {
-        		return (<div className="container">
+        		return (<div>
+
+
         			<h2>How many people are playing?</h2>
-        			<div className="btn-group" data-toggle="buttons">
-        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
-	        		      var gameLabel = numOfPlayers[0];
-	        		      var num = numOfPlayers[1]
-	        		      return (<label className={btn} key={num} onClick={()=>this.setState({numPlayers:num})}>
-						    <input type="radio" autoComplete="off"/>{gameLabel}
-						  </label>)
-					})}
-				 	</div>
+	        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
+		        		      var gameLabel = numOfPlayers[0];
+		        		      var num = numOfPlayers[1]
+		        		      return (<Radio label='numPlayers' options={gameLabel} key={num} onChange={()=>this.setState({numPlayers:num})} />)
+						})}
 
 					<h2>What type(s) of game would you like to play?</h2>
 
-					<div className="btn-group" data-toggle="buttons">
+					
 					{["Icebreaker", 
 					  'Card', 
 					  'Dice', 
@@ -84,24 +88,23 @@ class GameFilter extends React.Component {
 					  "Drinking", 
 					  "Roadtrip", 
 					  "Thought Provoking/Discussion"].map(gameType =>
-					  (<label className={btn} key={gameType} onClick={(e) =>this.stateToggler(gameType)}>
-			    		<input type="checkbox"  autoComplete="off"/> {gameType}
-					  </label>))
+					  (<Button bsStyle="primary" key={gameType} onClick={(e) =>this.stateToggler(gameType)}>
+			    		{gameType}
+					  </Button>))
 				    }
 		
-					</div>
 
 					<h2>How long would you like the game to be?</h2>
 					
-					<div className="btn-group" data-toggle="buttons">
+					<ButtonGroup>
 	        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
 		        		      var gameLabel = time[0];
 		        		      var num = time[1]
-		        		      return (<label className={btn} key={num} onClick={()=>this.setState({time:num})}>
-							    <input type="radio" autoComplete="off"/>{gameLabel}
-							  </label>)
+		        		      return (<Button bsStyle="primary" key={num} onClick={()=>this.setState({time:num})}>
+							    {gameLabel}
+							  </Button>)
 						})}
-				 	</div>
+				 	</ButtonGroup>
 
 
                 	<h2>How difficult of a game do you want to play?</h2>
@@ -109,7 +112,7 @@ class GameFilter extends React.Component {
                 	<div className="btn-group" data-toggle="buttons">
 	        			{['Easy', 'Medium', 'Hard'].map(levelOfDifficulty =>{
 		        	
-		        		      return (<label className={btn} key={levelOfDifficulty} onClick={()=>this.setState({difficulty:levelOfDifficulty})}>
+		        		      return (<label key={levelOfDifficulty} onClick={()=>this.setState({difficulty:levelOfDifficulty})}>
 							    <input type="radio" autoComplete="off"/>{levelOfDifficulty}
 							  </label>)
 						})}
