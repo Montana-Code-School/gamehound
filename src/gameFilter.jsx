@@ -40,13 +40,6 @@ class GameFilter extends React.Component {
     
   	}
 
-  	clearStates(){
-  		this.setState({renderedGames: null,
-  					   difficulty: null,
-  					   time: null,
-  					   numPlayers: null,
-  					   type: new ToggleList() })
-  	}
 
   	dontShowEmpty(prop){ //Can maybe use to generalize if needed? 
   		if(prop.length !== 0){

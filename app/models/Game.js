@@ -38,6 +38,11 @@ function arrDistance(arr, input1, input2){
 	}
 }
 
+function squareArrDistance(arr, input1, arrInputs){
+	const comparisons = arrInputs.map(input => arrDistance(arr, input1, input))
+	return Math.min.apply(null, comparisons)
+}
+
 var gameTypeScores = 
 	{Dice:
 		{Dice:1,
@@ -132,54 +137,37 @@ function typeScoreCalc(userType, gameTypeArr) { //always call with bracket notat
 
 
 function scoreGame(difficulty, numPlayers, time, type, game) {
-	var typeScore = typeScoreCalc(type, game.type)
-	var score = 0 + typeScore
-	
-	var difficultiesArr = ["Easy", "Medium", "Hard"]
-	var numPlayersArr = [1,2,3,4,5,8]
-	var timesArr = [5,15,30,60,61]
-	var difficultyScore = arrDistance(difficultiesArr, difficulty, game.difficulty)
-	var numPlayersScore  = arrDistance(numPlayersArr, numPlayers, game.numPlayers)
-	var timeScore = arrDistance(timesArr, time, game.time)
+	console.log(arguments)
+	var score = []
 
-	/////////
-	// difficulty, numplayer and time score is broken when only selecting one option 
-	///////
-
-	if (difficultyScore === 0) {
-		score++
-	} else if (difficultyScore === 1) {
-		score += .75
+	if(difficulty !== undefined){
+		var difficultiesArr = ["Easy", "Medium", "Hard"]
+		var difficultyDistance = arrDistance(difficultiesArr, difficulty, game.difficulty)
+		var difficultyWeights = [1, .75]
+		score.push(difficultyWeights[difficultyDistance] || 0)
 	}
 
-	if (numPlayersScore === 0) {
-		score++
-	} else if (numPlayersScore === 1) {
-		score += .5
-	} else if (numPlayersScore === 2) {
-		score += .1
+	if(time !== undefined){
+		var timesArr = [5,15,30,60,61]
+		var timeDistance = arrDistance(timesArr, time, game.time)
+		var timeWeights = [1, .75, .1]
+		score.push(timeWeights[timeDistance] || 0)
 	}
-	
-	if (timeScore === 0) {
-		score++
-	} else if (timeScore === 1) {
-		score += .75
-	} else if (timeScore === 2) {
-		score += .1
+	if (type !== undefined && type.length !== 0){
+		score.push(typeScoreCalc(type, game.type) || 0)
 	}
-	
-	var inputCount = 0
-	for(var i = 0; i <= 3; i++){
-		var newI = i.toString()
-		if(arguments[newI]){
-			inputCount++
-		}
+	if(numPlayers !== undefined){
+		var numPlayersArr = [1,2,3,4,5,8]
+		var numPlayersDistance  = squareArrDistance(numPlayersArr, numPlayers, game.numPlayers)
+		var numPlayersWeights = [1, .5,.1]
+		score.push(numPlayersWeights[numPlayersDistance] || 0)
 	}
 
-	score = Math.round((score/inputCount)*100)
+	console.log(score)
+
+	score = Math.round((score.reduce((a,b)=> a+b)/score.length)*100)
 	game = game.toObject()
 	game.totalScore = score
-	console.log("Do we have a score? ", score)
 	return game
 }
 
