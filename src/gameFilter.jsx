@@ -14,7 +14,7 @@ class GameFilter extends React.Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {type: new ToggleList(),
-	  				renderedGames: null,
+	  				renderedGames: null
 	  				 }
 	  // Operations usually carried out in componentWillMount go here
 	}
@@ -40,6 +40,14 @@ class GameFilter extends React.Component {
     
   	}
 
+  	clearStates(){
+  		this.setState({renderedGames: null,
+  					   difficulty: null,
+  					   time: null,
+  					   numPlayers: null,
+  					   type: new ToggleList() })
+  	}
+
   	dontShowEmpty(prop){ //Can maybe use to generalize if needed? 
   		if(prop.length !== 0){
   			return (<li className="list-group-item"><h3>Items Needed:</h3> <h4>{prop}</h4></li>)
@@ -52,6 +60,9 @@ class GameFilter extends React.Component {
         	if(this.state.renderedGames){
         		return (
         			<div>
+	        			<div>
+	        				
+	        			</div>
 	        			<ul className="list-group">
 	        				{this.state.renderedGames.map(game => (<div><li className="list-group-item"><h3>Name:</h3> <h4>{game.gameName}</h4></li>
 	        													   		<li className="list-group-item"><h3>Percent Match:</h3> <h4>{game.totalScore}%</h4></li>

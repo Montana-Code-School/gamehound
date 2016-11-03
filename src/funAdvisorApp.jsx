@@ -40,7 +40,7 @@ class FunAdvisorApp extends React.Component {
     render() {
 
         if(!this.state){
-            return <div>loading... </div>
+            return <div>Loading... </div>
         } else if(this.state.loggedIn && this.state.funAdvUsername === 'admin'){ //When we are lost add parathensis to this 
             return (<div>
                      <Header/>

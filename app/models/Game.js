@@ -142,6 +142,10 @@ function scoreGame(difficulty, numPlayers, time, type, game) {
 	var numPlayersScore  = arrDistance(numPlayersArr, numPlayers, game.numPlayers)
 	var timeScore = arrDistance(timesArr, time, game.time)
 
+	/////////
+	// difficulty, numplayer and time score is broken when only selecting one option 
+	///////
+
 	if (difficultyScore === 0) {
 		score++
 	} else if (difficultyScore === 1) {
@@ -175,6 +179,7 @@ function scoreGame(difficulty, numPlayers, time, type, game) {
 	score = Math.round((score/inputCount)*100)
 	game = game.toObject()
 	game.totalScore = score
+	console.log("Do we have a score? ", score)
 	return game
 }
 
