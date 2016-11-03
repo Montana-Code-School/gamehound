@@ -6,13 +6,6 @@ import requests from './request.js'
 import _ from 'lodash'
 import ToggleList from './toggleList'
 
-import { ButtonGroup, Button } from 'react-bootstrap';
-
-var ReactBtn = require('react-btn-checkbox');
-var Checkbox = ReactBtn.Checkbox;
-var Radio = ReactBtn.Radio;
-
-
 var request = requests.request
 
 class GameFilter extends React.Component {
@@ -21,7 +14,8 @@ class GameFilter extends React.Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {type: new ToggleList(),
-	  				renderedGames: null }
+	  				renderedGames: null,
+	  				 }
 	  // Operations usually carried out in componentWillMount go here
 	}
 
@@ -54,6 +48,7 @@ class GameFilter extends React.Component {
 
 
 	render() {
+        	var btn = "btn btn-primary";
         	if(this.state.renderedGames){
         		return (
         			<div>
@@ -67,19 +62,21 @@ class GameFilter extends React.Component {
 	        			</ul>
         			</div>)
         	} else {
-        		return (<div>
-
-
+        		return (<div className="container">
         			<h2>How many people are playing?</h2>
-	        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
-		        		      var gameLabel = numOfPlayers[0];
-		        		      var num = numOfPlayers[1]
-		        		      return (<Radio label='numPlayers' options={gameLabel} key={num} onChange={()=>this.setState({numPlayers:num})} />)
-						})}
+        			<div className="btn-group" data-toggle="buttons">
+        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
+	        		      var gameLabel = numOfPlayers[0];
+	        		      var num = numOfPlayers[1]
+	        		      return (<label className={btn} key={num} onClick={()=>this.setState({numPlayers:num})}>
+						    <input type="radio" autoComplete="off"/>{gameLabel}
+						  </label>)
+					})}
+				 	</div>
 
 					<h2>What type(s) of game would you like to play?</h2>
 
-					
+					<div className="btn-group" data-toggle="buttons">
 					{["Icebreaker", 
 					  'Card', 
 					  'Dice', 
@@ -88,23 +85,24 @@ class GameFilter extends React.Component {
 					  "Drinking", 
 					  "Roadtrip", 
 					  "Thought Provoking/Discussion"].map(gameType =>
-					  (<Button bsStyle="primary" key={gameType} onClick={(e) =>this.stateToggler(gameType)}>
-			    		{gameType}
-					  </Button>))
+					  (<label className={btn} key={gameType} onClick={(e) =>this.stateToggler(gameType)}>
+			    		<input type="checkbox"  autoComplete="off"/> {gameType}
+					  </label>))
 				    }
 		
+					</div>
 
 					<h2>How long would you like the game to be?</h2>
 					
-					<ButtonGroup>
+					<div className="btn-group" data-toggle="buttons">
 	        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
 		        		      var gameLabel = time[0];
 		        		      var num = time[1]
-		        		      return (<Button bsStyle="primary" key={num} onClick={()=>this.setState({time:num})}>
-							    {gameLabel}
-							  </Button>)
+		        		      return (<label className={btn} key={num} onClick={()=>this.setState({time:num})}>
+							    <input type="radio" autoComplete="off"/>{gameLabel}
+							  </label>)
 						})}
-				 	</ButtonGroup>
+				 	</div>
 
 
                 	<h2>How difficult of a game do you want to play?</h2>
@@ -112,7 +110,7 @@ class GameFilter extends React.Component {
                 	<div className="btn-group" data-toggle="buttons">
 	        			{['Easy', 'Medium', 'Hard'].map(levelOfDifficulty =>{
 		        	
-		        		      return (<label key={levelOfDifficulty} onClick={()=>this.setState({difficulty:levelOfDifficulty})}>
+		        		      return (<label className={btn} key={levelOfDifficulty} onClick={()=>this.setState({difficulty:levelOfDifficulty})}>
 							    <input type="radio" autoComplete="off"/>{levelOfDifficulty}
 							  </label>)
 						})}
@@ -122,8 +120,8 @@ class GameFilter extends React.Component {
 				 		<button className="btn btn-success" onClick={this.getGame.bind(this)}>Fetch Me A Game!</button>
 				 	</div>
                 </div>)
-  		}		
-  	}
+  				}		
+  		}
 
 }
 
