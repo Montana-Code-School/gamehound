@@ -47,6 +47,14 @@ class GameFilter extends React.Component {
   		}
   	}
 
+  	clearState(){
+  		this.setState({renderedGames: null,
+  					   difficulty: undefined,
+  		    		   time: undefined,
+  		    		   type: new ToggleList(),
+  		    		   numPlayers: undefined
+  		    		}) 
+  	}
 
 	render() {
         	var btn = "btn btn-primary";
@@ -54,7 +62,7 @@ class GameFilter extends React.Component {
         		return (
         			<div>
 	        			<div>
-	        				
+	        				<button className="btn btn-success" onClick={this.clearState.bind(this)}>Search Again</button>
 	        			</div>
 	        			<ul className="list-group">
 	        				{this.state.renderedGames.map(game => (<div><li className="list-group-item"><h3>Name:</h3> <h4>{game.gameName}</h4></li>

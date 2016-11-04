@@ -163,9 +163,8 @@ function scoreGame(difficulty, numPlayers, time, type, game) {
 		score.push(numPlayersWeights[numPlayersDistance] || 0)
 	}
 
-	console.log(score)
 
-	score = Math.round((score.reduce((a,b)=> a+b)/score.length)*100)
+	score = score.length === 0 ? 0 : Math.round((score.reduce((a,b)=> a+b)/score.length)*100)
 	game = game.toObject()
 	game.totalScore = score
 	return game
