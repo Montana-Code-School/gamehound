@@ -1,4 +1,5 @@
 import React from 'react';
+import GameFilter from './gameFilter.jsx'
 
 class Header extends React.Component {
 
@@ -23,7 +24,7 @@ class Header extends React.Component {
 	                    </div>
 
 	                </div>
-
+	                {this.props.children || <GameFilter/>}
 	            </div> )
 	}
 }

@@ -1,6 +1,7 @@
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 3000;
+var path     = require('path')
 var mongoose = require('mongoose');
 var flash    = require('connect-flash');
 var passport = require('passport');
@@ -49,6 +50,10 @@ app.use(flash());
 // // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 app.use(express.static('public'));
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public/index.html'))
+})
 
 // launch ======================================================================
 app.listen(port);

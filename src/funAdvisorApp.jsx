@@ -1,14 +1,19 @@
+
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GameFilter from './gameFilter.jsx';
 import AdminPanel from './adminPanel.jsx'
 import requests from './request.js';
-import Login from './login.jsx'
+import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 import UserManagement from './userManagement.jsx'
-import Header from './header.jsx'
 import _ from 'lodash'
+//all components
 
-
+import Header from './header.jsx'
+import SignUp from './signup.jsx'
+import Login from './login.jsx'
 
 
 var request = requests.request
@@ -37,23 +42,54 @@ class FunAdvisorApp extends React.Component {
     
     render() {
 
-        if(!this.state){
-            return <div>loading... </div>
-        } else if(this.state.loggedIn && this.state.funAdvUsername === 'admin'){ //When we are lost add parathensis to this 
-            return (<div>
-                     <Header/>
-                     <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-                     <AdminPanel/>
-                    </div>)
-        } else {
-            return (<div>
-                     <Header/>
-                     <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-                     <GameFilter />
-                    </div>)
-        }
+    return (<Router history = {browserHistory}>
+        <Route path="/" component={Header}>
+            <IndexRoute component={GameFilter}/>
+            <Route path="/results" component={Header}/>
+            <Route path="game" component={Header}/>
+            <Route path="profile/:userName" component={Header}/>
+            <Route path="login" component={Login}/>
+            <Route path="signup" component={SignUp}/>
+        </Route>
+    </Router>)
+
+        
     }
 }
+
+
+
+
+
+// if(!this.state){
+//             return <div>loading... </div>
+//         } else if(this.state.loggedIn && this.state.funAdvUsername === 'admin'){ //When we are lost add parathensis to this 
+//             return (<div>
+//                      <Header/>
+//                      <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
+//                      <AdminPanel/>
+//                     </div>)
+//         } else {
+//             return (<div>
+//                      <Header/>
+//                      <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
+//                      <GameFilter />
+//                     </div>)
+//         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

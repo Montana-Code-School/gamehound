@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  devtool: '#eval-source-map',
   entry: './src/main.js',
   output: { path: __dirname, filename: 'bundle.js', publicPath: "/" },
   module: {
