@@ -3,15 +3,26 @@ import ReactDOM from 'react-dom';
 import GameFilter from './gameFilter.jsx';
 import AdminPanel from './adminPanel.jsx'
 import requests from './request.js';
-import Login from './login.jsx'
-import UserManagement from './userManagement.jsx'
-import Header from './header.jsx'
+import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 import _ from 'lodash'
+import Header from './header.jsx'
+import SignUp from './signup.jsx'
+import Login from './login.jsx'
+import RenderedGames from './renderedGames.jsx'
+import ToggleList from './toggleList'
 
 var request = requests.request
 
 
 class FunAdvisorApp extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            renderedGames: [],
+            type: new ToggleList()
+        }
+    }
+    
     componentWillMount() {
         request('/api/user', 'GET', null, loggedInResp => {
             this.setState({ loggedIn: loggedInResp.loggedIn,
@@ -19,8 +30,6 @@ class FunAdvisorApp extends React.Component {
                         })
         })
     }
-
-    
 
     setLogin(response){
         this.setState({loggedIn: response.loggedIn})
@@ -32,31 +41,34 @@ class FunAdvisorApp extends React.Component {
         }
     }
 
-    refreshStories(){
-        request('/api/game/recommend', 'GET', null, response => 
-            this.setState({stories: response}))
-    }
-    
-    render() {
+    getGame(difficulty, type, numPlayers, time){
+      console.log("This is the type", type)
+      request('/api/game/recommend', "POST", {
+                                  difficulty: difficulty,
+                                  type: type,
+                                  numPlayers: numPlayers,
+                                  time: time
 
-        if(!this.state){
-            return <div>Loading... </div>
-        } else if(this.state.loggedIn && this.state.funAdvUsername === 'admin'){ //When we are lost add parathensis to this 
-            return (<div>
-                     <Header/>
-                     <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-                     <AdminPanel/>
-                    </div>)
-        } else {
-            return (<div>
-                     <Header/>
-                     <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-                     <GameFilter renderedGameProp={this.state.renderedGames}/>
-                    </div>)
-        }
+                                  }, 
+                                 response => {
+
+                                    this.setState({renderedGames:response})
+                                    browserHistory.push('/results')
+                                  })
+    
+    }
+
+    render() {
+        console.log('rg', this.state.renderedGames.length)
+    return (<Router history = {browserHistory}>
+        <Route path="/" component={Header}>
+            <IndexRoute component={() => <GameFilter getGame={this.getGame.bind(this)} /> }/>
+            <Route path='results' component={() =>  <RenderedGames renderedGames={this.state.renderedGames} /> } /> 
+            <Route path="game/:gameId" component={Header}/>
+            <Route path="login" component={() => <Login setLogin={this.setLogin.bind(this)}/>}/>
+            <Route path="signup" component={SignUp}/>
+        </Route>
+    </Router>)
     }
 }
-
-
-
 ReactDOM.render(<FunAdvisorApp/>, document.getElementById('app'));
