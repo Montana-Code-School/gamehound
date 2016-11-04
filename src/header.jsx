@@ -1,11 +1,13 @@
 import React from 'react';
 import GameFilter from './gameFilter.jsx'
-
+import NavBar from './navBar.jsx'
 class Header extends React.Component {
 
 	render(){
-	    return (<div className="container">
-
+	    return (
+	    		
+	    	<div className="container">
+	    		<NavBar/>
  					<div className="row">
 	                    
 	                    <div className="col-lg-4 col-sm-4 col-xs-4">
