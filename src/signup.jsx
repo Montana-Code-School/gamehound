@@ -41,7 +41,6 @@ class SignUp extends React.Component{
     }
 
     noUsernameOrPassword(){
-    	console.log("in no username or password")
     	if(_.get(this,'state.showError')){
 	    	if(!this.state.username){
 	    		return <div className="alert alert-danger">Please enter a username.</div>

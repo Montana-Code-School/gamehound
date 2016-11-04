@@ -7,9 +7,7 @@ import GameFilter from './gameFilter.jsx';
 import AdminPanel from './adminPanel.jsx'
 import requests from './request.js';
 import { Router, Route, browserHistory, IndexRoute} from 'react-router'
-import UserManagement from './userManagement.jsx'
 import _ from 'lodash'
-//all components
 import Header from './header.jsx'
 import SignUp from './signup.jsx'
 import Login from './login.jsx'
@@ -38,7 +36,7 @@ class FunAdvisorApp extends React.Component {
             this.setState({funAdvUsername: response.user.username})
         }
     }
-    //ask about /results
+
 
     render() {
 
@@ -51,45 +49,6 @@ class FunAdvisorApp extends React.Component {
             <Route path="signup" component={SignUp}/>
         </Route>
     </Router>)
-
-        
     }
 }
-
-
-
-
-
-// if(!this.state){
-//             return <div>loading... </div>
-//         } else if(this.state.loggedIn && this.state.funAdvUsername === 'admin'){ //When we are lost add parathensis to this 
-//             return (<div>
-//                      <Header/>
-//                      <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-//                      <AdminPanel/>
-//                     </div>)
-//         } else {
-//             return (<div>
-//                      <Header/>
-//                      <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-//                      <GameFilter />
-//                     </div>)
-//         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ReactDOM.render(<FunAdvisorApp/>, document.getElementById('app'));

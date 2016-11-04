@@ -28,8 +28,8 @@ module.exports = function(app, passport) {
             type:req.body.type.list,
             numPlayers:req.body.numPlayers,
             time:req.body.time}
-            ,function(err, filteredList){
-                res.json(filteredList)
+            ,function(err, sortedGames){
+                res.json(sortedGames)
         })
 
     })
