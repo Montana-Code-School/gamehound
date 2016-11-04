@@ -10,7 +10,6 @@ import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 import UserManagement from './userManagement.jsx'
 import _ from 'lodash'
 //all components
-
 import Header from './header.jsx'
 import SignUp from './signup.jsx'
 import Login from './login.jsx'
@@ -39,16 +38,16 @@ class FunAdvisorApp extends React.Component {
             this.setState({funAdvUsername: response.user.username})
         }
     }
-    
+    //ask about /results
+
     render() {
 
     return (<Router history = {browserHistory}>
         <Route path="/" component={Header}>
             <IndexRoute component={GameFilter}/>
-            <Route path="/results" component={Header}/>
-            <Route path="game" component={Header}/>
-            <Route path="profile/:userName" component={Header}/>
-            <Route path="login" component={Login}/>
+            <Route path="results" component={Header}/>
+            <Route path="game/:gameId" component={Header}/>
+            <Route path="login" component={() => <Login setLogin={this.setLogin.bind(this)}/>}/>
             <Route path="signup" component={SignUp}/>
         </Route>
     </Router>)

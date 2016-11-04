@@ -2,6 +2,7 @@ import React from 'react';
 import keydown from 'react-keydown';
 import requests from './request.js'
 import _ from 'lodash'
+import {browserHistory} from 'react-router'
 
 var request = requests.request
 var formRequest = requests.formRequest
@@ -17,7 +18,9 @@ class Login extends React.Component {
                                   console.log(response.flash)
                                   this.setError(response.flash);
                                   this.props.setLogin(response);
-
+                                  if(response.loggedIn){
+                                    browserHistory.push('/')
+                                  }
                                   })
     } else {
       this.setState({showError:true})
