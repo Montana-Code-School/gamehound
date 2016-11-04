@@ -135,7 +135,7 @@ class AdminPanel extends React.Component{
 					 	<h2>Description</h2>
 
 					 	<div>
-					 		<textarea onChange={(e)=>this.setState({description:e.target.value})}></textarea>
+					 		<textarea onChange={(e)=>this.setState({description:e.target.value})} cols="100" rows="4"></textarea>
 					 	</div>
 
 					 	<h2>Items Needed</h2>
@@ -144,7 +144,7 @@ class AdminPanel extends React.Component{
 					 		<ul>
 					 		{this.mapTextList('itemsNeeded')}
 					 		</ul>
-					 		<textarea ref="itemsNeeded" onChange={(e)=>this.setState({item:e.target.value})} cols="25"></textarea>
+					 		<textarea ref="itemsNeeded" onChange={(e)=>this.setState({item:e.target.value})} cols="50"></textarea>
 					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
 					 	</div>
 
@@ -154,7 +154,7 @@ class AdminPanel extends React.Component{
 					 		<ol>
 					 		{this.mapTextList('tutorial')}
 					 		</ol>
-					 		<textarea ref="tutorial" onChange={(e)=>this.setState({instruction:e.target.value})} rows="2" cols="50"></textarea>
+					 		<textarea ref="tutorial" onChange={(e)=>this.setState({instruction:e.target.value})} rows="4" cols="100"></textarea>
 					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
 					 	</div>
 

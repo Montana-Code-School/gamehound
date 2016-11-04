@@ -17,11 +17,30 @@ var gameSchema = mongoose.Schema({
 //write filter methods here to pick user game
 													
 gameSchema.statics.createFilterScore = function(userInput, callback) {
+	this.find(function(err, games) {
 
+		if (err) {
+			callback(err)
+		} else {
+			var sortedGames = games.map(function(game) {
+				return scoreGame(userInput.difficulty, userInput.numPlayers, userInput.time, userInput.type, game)
+			}).sort(function(game1, game2) {
+				return game2.totalScore - game1.totalScore
+			})
+			callback(null, sortedGames)
+		}
+	})
 }
 
 function arrDistance(arr, input1, input2){
-	return Math.abs(arr.indexOf(input1) - arr.indexOf(input2))
+	if(input1 !== undefined && input2 !== undefined){
+		return Math.abs(arr.indexOf(input1) - arr.indexOf(input2))
+	}
+}
+
+function squareArrDistance(arr, input1, arrInputs){
+	const comparisons = arrInputs.map(input => arrDistance(arr, input1, input))
+	return Math.min.apply(null, comparisons)
 }
 
 var gameTypeScores = 
@@ -29,7 +48,7 @@ var gameTypeScores =
 		{Dice:1,
 		Card:.75,
 		Drinking:.5,
-		'Party/Game':.5,
+		'Party/Group':.5,
 		Icebreaker:.5,
 		'Movement/Improv':0,
 		'Thought Provoking/Discussion':0,
@@ -39,7 +58,7 @@ var gameTypeScores =
 		{Dice:.75,
 		Card:1,
 		Drinking:.5,
-		'Party/Game':.5,
+		'Party/Group':.5,
 		Icebreaker:.5,
 		'Movement/Improv':0,
 		'Thought Provoking/Discussion':0,
@@ -49,17 +68,17 @@ var gameTypeScores =
 		{Dice:.5,
 		Card:.5,
 		Drinking:1,
-		'Party/Game':.75,
+		'Party/Group':.75,
 		Icebreaker:.5,
 		'Movement/Improv':.75,
 		'Thought Provoking/Discussion':0,
 		Roadtrip:0},
 
-	'Party/Game':
+	'Party/Group':
 		{Dice:.5,
 		Card:.5,
 		Drinking:.75,
-		'Party/Game':1,
+		'Party/Group':1,
 		Icebreaker:.75,
 		'Movement/Improv':.75,
 		'Thought Provoking/Discussion':.5,
@@ -69,7 +88,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:.75,
-		'Party/Game':.75,
+		'Party/Group':.75,
 		Icebreaker:1,
 		'Movement/Improv':.75,
 		'Thought Provoking/Discussion':.5,
@@ -79,7 +98,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:.75,
-		'Party/Game':.75,
+		'Party/Group':.75,
 		Icebreaker:.75,
 		'Movement/Improv':1,
 		'Thought Provoking/Discussion':.5,
@@ -89,7 +108,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:0,
-		'Party/Game':.5,
+		'Party/Group':.5,
 		Icebreaker:.5,
 		'Movement/Improv':.5,
 		'Thought Provoking/Discussion':1,
@@ -99,7 +118,7 @@ var gameTypeScores =
 		{Dice:0,
 		Card:0,
 		Drinking:0,
-		'Party/Game':0,
+		'Party/Group':0,
 		Icebreaker:0,
 		'Movement/Improv':0,
 		'Thought Provoking/Discussion':.75,
@@ -111,44 +130,44 @@ function typeScoreCalc(userType, gameTypeArr) { //always call with bracket notat
 		return gameTypeArr.map(function(gameChoice){
 			return gameTypeScores[userChoice][gameChoice]
 		})
+		.filter(result => result !== undefined)
 	})	
-	return Math.max(..._.flatten(score))
+	return Math.max(..._.flatten(score)) || 0
 }
 
 
 function scoreGame(difficulty, numPlayers, time, type, game) {
-	var typeScore = typeScoreCalc(type, game.type)
-	var score = 0 + typeScore
-	var difficultiesArr = ["Easy", "Medium", "Hard"]
-	var numPlayersArr = [1,2,3,4,5,8]
-	var timesArr = [5,15,30,60,61]
-	var difficultyScore = arrDistance(difficultiesArr, difficulty, game.difficulty)
-	var numPlayersScore  = arrDistance(numPlayersArr, numPlayers, game.numPlayers)
-	var timeScore = arrDistance(timesArr, time, game.time)
-	
-	if (difficultyScore === 0) {
-		score++
-	} else if (difficultyScore === 1) {
-		score += .75
+	console.log(arguments)
+	var score = []
+
+	if(difficulty !== undefined){
+		var difficultiesArr = ["Easy", "Medium", "Hard"]
+		var difficultyDistance = arrDistance(difficultiesArr, difficulty, game.difficulty)
+		var difficultyWeights = [1, .75]
+		score.push(difficultyWeights[difficultyDistance] || 0)
 	}
 
-	if (numPlayersScore === 0) {
-		score++
-	} else if (numPlayersScore === 1) {
-		score += .5
-	} else if (numPlayersScore === 2) {
-		score += .1
+	if(time !== undefined){
+		var timesArr = [5,15,30,60,61]
+		var timeDistance = arrDistance(timesArr, time, game.time)
+		var timeWeights = [1, .75, .1]
+		score.push(timeWeights[timeDistance] || 0)
 	}
-	
-	if (timeScore === 0) {
-		score++
-	} else if (timeScore === 1) {
-		score += .75
-	} else if (timeScore === 2) {
-		score += .1
+	if (type !== undefined && type.length !== 0){
+		score.push(typeScoreCalc(type, game.type) || 0)
+	}
+	if(numPlayers !== undefined){
+		var numPlayersArr = [1,2,3,4,5,8]
+		var numPlayersDistance  = squareArrDistance(numPlayersArr, numPlayers, game.numPlayers)
+		var numPlayersWeights = [1, .5,.1]
+		score.push(numPlayersWeights[numPlayersDistance] || 0)
 	}
 
-	return score/4
+
+	score = score.length === 0 ? 0 : Math.round((score.reduce((a,b)=> a+b)/score.length)*100)
+	game = game.toObject()
+	game.totalScore = score
+	return game
 }
 
 	

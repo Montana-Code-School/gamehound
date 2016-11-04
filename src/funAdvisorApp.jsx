@@ -8,9 +8,6 @@ import UserManagement from './userManagement.jsx'
 import Header from './header.jsx'
 import _ from 'lodash'
 
-
-
-
 var request = requests.request
 
 
@@ -34,11 +31,16 @@ class FunAdvisorApp extends React.Component {
             this.setState({funAdvUsername: response.user.username})
         }
     }
+
+    refreshStories(){
+        request('/api/game/recommend', 'GET', null, response => 
+            this.setState({stories: response}))
+    }
     
     render() {
 
         if(!this.state){
-            return <div>loading... </div>
+            return <div>Loading... </div>
         } else if(this.state.loggedIn && this.state.funAdvUsername === 'admin'){ //When we are lost add parathensis to this 
             return (<div>
                      <Header/>
@@ -49,7 +51,7 @@ class FunAdvisorApp extends React.Component {
             return (<div>
                      <Header/>
                      <UserManagement setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} />
-                     <GameFilter />
+                     <GameFilter renderedGameProp={this.state.renderedGames}/>
                     </div>)
         }
     }

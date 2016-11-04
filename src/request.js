@@ -24,7 +24,6 @@ function formRequest(url, method, body, callback){
 		params.push(key + '=' + body[key])
 	}
 	params = params.join('&')
-	console.log('params', params)
 	//Send the proper header information along with the request
 	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	http.onreadystatechange = function() {//Call a function when the state changes.

@@ -1,5 +1,3 @@
-
-
 function ToggleList(list){
 	this.list = list ? list : []
 }
