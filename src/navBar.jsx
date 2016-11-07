@@ -34,7 +34,7 @@ render() {
                 <button type="submit" className="btn btn-default">Sign In</button>
               </li> 
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Dont have an account?</b> <span className="caret"></span></a>
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Don't have an account?</b> <span className="caret"></span></a>
                   <ul id="login-dp" className="dropdown-menu">
                     <li>
                      <div className="row">
