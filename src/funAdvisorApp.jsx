@@ -10,6 +10,7 @@ import SignUp from './signup.jsx'
 import Login from './login.jsx'
 import RenderedGames from './renderedGames.jsx'
 import ToggleList from './toggleList'
+import Tutorial from './tutorial.jsx'
 
 var request = requests.request
 
