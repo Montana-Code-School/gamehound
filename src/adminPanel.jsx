@@ -3,6 +3,7 @@ import keydown from 'react-keydown';
 import requests from './request.js'
 import ToggleList from './toggleList'
 import _ from 'lodash'
+import {browserHistory} from 'react-router'
 
 var request = requests.request
 
@@ -77,120 +78,131 @@ class AdminPanel extends React.Component{
 					   itemsNeeded: new ToggleList()})
 	}
 
+	redirect(){
+		browserHistory.push('/')
+	}
+
 	render(){
 		var btn = "btn btn-primary";
-		if(!this.state.gamePostSuccess){
-	        return  (<div className="container">
+		if(this.props.loggedIn){
+			if(!this.state.gamePostSuccess){
+		        return  (<div className="container">
 
-	        			<h2>Game Name</h2>
-	        				<div>
-	        					<input type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
-	        				</div>
-
-
-	        			<h2>Number of Players</h2>
-
-	        			<div className="btn-group" data-toggle="buttons">
-		        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
-			        		      var gameLabel = numOfPlayers[0];
-			        		      var num = numOfPlayers[1]
-			        		      return (<label className={btn} key={num} onClick={()=>this.stateToggler(num, 'numPlayers')}>
-								    <input type="checkbox" autoComplete="off"/>{gameLabel}
-								  </label>)
-							})}
-					 	</div>
+		        			<h2>Game Name</h2>
+		        				<div>
+		        					<input type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
+		        				</div>
 
 
+		        			<h2>Number of Players</h2>
 
-						<h2>Type</h2>
+		        			<div className="btn-group" data-toggle="buttons">
+			        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
+				        		      var gameLabel = numOfPlayers[0];
+				        		      var num = numOfPlayers[1]
+				        		      return (<label className={btn} key={num} onClick={()=>this.stateToggler(num, 'numPlayers')}>
+									    <input type="checkbox" autoComplete="off"/>{gameLabel}
+									  </label>)
+								})}
+						 	</div>
 
-						<div className="btn-group" data-toggle="buttons">
-						{["Icebreaker", 
-						  'Card', 
-						  'Dice', 
-						  "Movement/Improv", 
-						  "Party/Group", 
-						  "Drinking", 
-						  "Roadtrip", 
-						  "Thought Provoking/Discussion"].map(gameType =>
-						  (<label className={btn} key={gameType} onClick={(e)=>this.stateToggler(gameType, 'type')}>
-				    		<input type="checkbox"  autoComplete="off"/> {gameType}
-						  </label>))
-					    }
-			
-						</div>
 
-						<h2>Length</h2>
-						
-						<div className="btn-group" data-toggle="buttons">
-		        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
-			        		      var gameLabel = time[0];
-			        		      var num = time[1]
-			        		      return (<label className={btn} key={num} onClick={()=>this.setState({time:num})}>
-								    <input type="radio" autoComplete="off"/>{gameLabel}
-								  </label>)
-							})}
-					 	</div>
 
-					 	<h2>Description</h2>
+							<h2>Type</h2>
 
-					 	<div>
-					 		<textarea onChange={(e)=>this.setState({description:e.target.value})} cols="100" rows="4"></textarea>
-					 	</div>
+							<div className="btn-group" data-toggle="buttons">
+							{["Icebreaker", 
+							  'Card', 
+							  'Dice', 
+							  "Movement/Improv", 
+							  "Party/Group", 
+							  "Drinking", 
+							  "Roadtrip", 
+							  "Thought Provoking/Discussion"].map(gameType =>
+							  (<label className={btn} key={gameType} onClick={(e)=>this.stateToggler(gameType, 'type')}>
+					    		<input type="checkbox"  autoComplete="off"/> {gameType}
+							  </label>))
+						    }
+				
+							</div>
 
-					 	<h2>Items Needed</h2>
+							<h2>Length</h2>
+							
+							<div className="btn-group" data-toggle="buttons">
+			        			{[['5-10 minutes', 5] ,['15 minutes', 15], ['30 minutes', 30], ['1 hour', 60], ['>1 hour', 61]].map(time =>{
+				        		      var gameLabel = time[0];
+				        		      var num = time[1]
+				        		      return (<label className={btn} key={num} onClick={()=>this.setState({time:num})}>
+									    <input type="radio" autoComplete="off"/>{gameLabel}
+									  </label>)
+								})}
+						 	</div>
 
-					 	<div>
-					 		<ul>
-					 		{this.mapTextList('itemsNeeded')}
-					 		</ul>
-					 		<textarea ref="itemsNeeded" onChange={(e)=>this.setState({item:e.target.value})} cols="50"></textarea>
-					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
-					 	</div>
+						 	<h2>Description</h2>
 
-					 	<h2>Tutorial</h2>
+						 	<div>
+						 		<textarea onChange={(e)=>this.setState({description:e.target.value})} cols="100" rows="4"></textarea>
+						 	</div>
 
-					 	<div>
-					 		<ol>
-					 		{this.mapTextList('tutorial')}
-					 		</ol>
-					 		<textarea ref="tutorial" onChange={(e)=>this.setState({instruction:e.target.value})} rows="4" cols="100"></textarea>
-					 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
-					 	</div>
+						 	<h2>Items Needed</h2>
 
-					 	<h2>Rating</h2>
-					 		<select onChange={(e)=>this.setState({rating:e.target.value})}>
-							  <option value="0" > </option>
-							  <option value="5" >5</option>
-							  <option value="4">4</option>
-							  <option value="3">3</option>
-							  <option value="2">2</option>
-							  <option value="1">1</option>
-							</select>
+						 	<div>
+						 		<ul>
+						 		{this.mapTextList('itemsNeeded')}
+						 		</ul>
+						 		<textarea ref="itemsNeeded" onChange={(e)=>this.setState({item:e.target.value})} cols="50"></textarea>
+						 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
+						 	</div>
 
-	                	<h2>Difficulty</h2>
+						 	<h2>Tutorial</h2>
 
-	                	<div className="btn-group" data-toggle="buttons">
-		        			{['Easy', 'Medium', 'Hard'].map(levelOfDifficulty =>{
-			        	
-			        		      return (<label className={btn} key={levelOfDifficulty} onClick={()=>this.setState({difficulty:levelOfDifficulty})}>
-								    <input type="radio" autoComplete="off"/>{levelOfDifficulty}
-								  </label>)
-							})}
-					 	</div>
+						 	<div>
+						 		<ol>
+						 		{this.mapTextList('tutorial')}
+						 		</ol>
+						 		<textarea ref="tutorial" onChange={(e)=>this.setState({instruction:e.target.value})} rows="4" cols="100"></textarea>
+						 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
+						 	</div>
 
-					 	<div>
-					 		<button className="btn btn-success" onClick={this.createGame.bind(this)}>Submit Game</button>
-					 		<button className="btn btn-warning" onClick={()=>this.setState({tutorial: new ToggleList})}>Clear Everything Forever</button>
+						 	<h2>Rating</h2>
+						 		<select onChange={(e)=>this.setState({rating:e.target.value})}>
+								  <option value="0" > </option>
+								  <option value="5" >5</option>
+								  <option value="4">4</option>
+								  <option value="3">3</option>
+								  <option value="2">2</option>
+								  <option value="1">1</option>
+								</select>
 
-					 	</div>
-	                </div>)
-	    } else {
-	    	return (<div>
-	    				<h2>Congrats! You have submitted a game!</h2>
-	    				<button className="btn btn-success" onClick={()=>this.setState({gamePostSuccess: false})}>Create Another Game</button>
-	    			</div>)
-	    }
+		                	<h2>Difficulty</h2>
+
+		                	<div className="btn-group" data-toggle="buttons">
+			        			{['Easy', 'Medium', 'Hard'].map(levelOfDifficulty =>{
+				        	
+				        		      return (<label className={btn} key={levelOfDifficulty} onClick={()=>this.setState({difficulty:levelOfDifficulty})}>
+									    <input type="radio" autoComplete="off"/>{levelOfDifficulty}
+									  </label>)
+								})}
+						 	</div>
+
+						 	<div>
+						 		<button className="btn btn-success" onClick={this.createGame.bind(this)}>Submit Game</button>
+						 		<button className="btn btn-warning" onClick={()=>this.setState({tutorial: new ToggleList})}>Clear Everything Forever</button>
+
+						 	</div>
+		                </div>)
+		    } else {
+		    	return (<div>
+		    				<h2>Congrats! You have submitted a game!</h2>
+		    				<button className="btn btn-success" onClick={()=>this.setState({gamePostSuccess: false})}>Create Another Game</button>
+		    			</div>)
+		    } 
+		} else {
+			return (<div>
+				<p>Please wait...</p>
+				{this.redirect()}
+			</div>)
+		}
 	}
 
 }

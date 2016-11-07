@@ -20,7 +20,8 @@ class FunAdvisorApp extends React.Component {
         super(props)
         this.state = {
             renderedGames: [],
-            type: new ToggleList()
+            type: new ToggleList(),
+            loggedIn: false
         }
     }
     
@@ -60,16 +61,19 @@ class FunAdvisorApp extends React.Component {
     }
 
     render() {
-        console.log('rg', this.state.renderedGames.length)
+        console.log('logged in ', this.state.loggedIn)
     return (<Router history = {browserHistory}>
-        <Route path="/" component={Header}>
+        <Route path="/" component={(props) => <Header children={props.children} setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn}/>}>
             <IndexRoute component={() => <GameFilter getGame={this.getGame.bind(this)} /> }/>
             <Route path='results' component={() =>  <RenderedGames renderedGames={this.state.renderedGames} /> } /> 
             <Route path="game/:gameId" component={Header}/>
-            <Route path="login" component={() => <Login setLogin={this.setLogin.bind(this)}/>}/>
+            <Route path="login" component={() => <Login setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} /> } />
             <Route path="signup" component={SignUp}/>
+            <Route path="adminPanel" component={()=> <AdminPanel loggedIn={this.state.loggedIn}/>}/>
         </Route>
     </Router>)
     }
 }
 ReactDOM.render(<FunAdvisorApp/>, document.getElementById('app'));
+
+

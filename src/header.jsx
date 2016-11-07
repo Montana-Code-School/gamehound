@@ -1,14 +1,15 @@
 import React from 'react';
 import GameFilter from './gameFilter.jsx'
 import NavBar from './navBar.jsx'
+
 class Header extends React.Component {
 
 	render(){
-
+		console.log(this.props.children)
 	    return (
 	    		
 	    	<div className="container">
-	    		<NavBar/>
+	    		<NavBar setLogin={this.props.setLogin} loggedIn={this.props.loggedIn}/>
  					
  					<div className="jumbotron row">
 	                    <img src="/imgs/bassetgif.gif" id="dog" className="col-lg-3 col-md-3 col-sm-3 col-xs-12"/>
