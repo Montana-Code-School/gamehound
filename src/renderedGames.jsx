@@ -22,7 +22,9 @@ class RenderedGames extends React.Component {
 
   	dontShowEmpty(prop){ //Can maybe use to generalize if needed? 
   		if(prop.length !== 0){
-  			return (<li className="list-group-item"><h3>Items Needed:</h3> <h4>{prop}</h4></li>)
+  			return (<div className="col-md-4">
+                    <h4>Items Needed:</h4> <h4 className="renderedResult">{prop}</h4>
+                </div>)
   		}
   	}
 
@@ -39,16 +41,51 @@ class RenderedGames extends React.Component {
 		return (
     			<div>
         			<div>
-        				<h1>hello</h1>
         				<button className="btn btn-success" onClick={() => browserHistory.push('/')}>Search Again</button>
         			</div>
         			<ul className="list-group">
-        				{(this.props.renderedGames|| []).map(game => (<div><li className="list-group-item"><h3>Name:</h3> <h4>{game.gameName}</h4></li>
-        													   		<li className="list-group-item"><h3>Percent Match:</h3> <h4>{game.totalScore}%</h4></li>
-        													   	    <li className="list-group-item"><h3>Description:</h3> <h4>{game.description}</h4></li>
-        													   	    {this.dontShowEmpty(game.itemsNeeded.join(", "))}
-        													   	    <li className="list-group-item"><h3>Type:</h3> <h4>{game.type.join(", ")}</h4></li>
-        													   </div>))}
+        				{(this.props.renderedGames|| []).map(game => (
+
+                                    <div className="container">
+
+                                      <div className="renderedGame">
+                                        <div className="row">
+                                          <div className="col-md-5">
+                                            <h4>Name:</h4> <h4 className="renderedResult">{game.gameName}</h4>
+                                          </div>
+                                          <div className="col-md-4">
+          													   		  <h4>Percent Match:</h4> <h4 className="renderedResult">{game.totalScore}%</h4>  
+                                          </div>
+                                        </div>
+
+                                        
+                                      <div className="row">
+                                        <div className="col-md-5">
+                                           <h4>Type:</h4> <h4 className="renderedResult">{game.type.join(", ")}</h4>
+                                        </div>
+
+                                        {this.dontShowEmpty(game.itemsNeeded.join(", "))}
+
+                                      </div>
+
+
+                                      <div className="row">
+                                        <div className="col-md-12">
+                                          <h4>Description:</h4> <h4 className="renderedResult">{game.description}</h4>
+        													   	  </div>
+                                      </div>
+
+                                      <div className="row">
+                                        <div className="col-md-8">
+                                          <button className="btn btn-success">How to Play -> (we need to add a Link route here with params for URL)</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                        
+                                  </div>
+
+
+                                     ))}
         			</ul>
     			</div>)
 	}
