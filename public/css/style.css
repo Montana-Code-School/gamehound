@@ -4,33 +4,12 @@
 
 body {
 	background:#fff;
-}
-
-.btn-primary {
-	margin: 15px;
-	background:#565656;
-	border:1px #888;
-	padding:10px;
-}
-
-.btn-success {
-	font-size:1.1em;
-	background:#10323f;
-	border:1px #888;
-}
-
-.btn-success:hover {
-	font-size:1.1em;
-	background:#76320a;
-	border:1px #888;
-
+	padding-top: 20px
 }
 
 h1 {
 	font-family:'Lora',serif;
-	font-size:4.1em;
 	font-weight:bold;
-
 }
 
 h2 {
@@ -39,6 +18,94 @@ h2 {
 
 h3 {
 	font-size:1.6em;
+}
+
+.container {
+	margin: 0px auto 50px auto;
+	float: center;
+	text-align: center;
+}
+
+.btn-group {
+	display: inline-block;
+}
+
+.btn-primary {
+	margin: 15px;
+	background: #0099cc;
+    color: #ffffff;
+	border:1px #888;
+	border-radius: 0px;
+	padding:10px;
+}
+
+.btn-primary:hover {
+	background:#ffc100;
+}
+
+.btn-primary.raised {
+	box-shadow: 3px 3px 0 0 #007299;
+}
+
+.btn-primary.raised:active, .btn-primary.raised.active {
+	background: #ffc100;
+	margin-bottom: -3px;
+	margin-top: 3px;
+	box-shadow: 3px 3px 0 0 #ffe066;
+}
+
+.btn-success {
+	font-size:1.5em;
+	background:#00b33c;
+	border:1px #888;
+	border-radius: 1px;
+	margin: 15px;
+}
+
+.btn-success:hover {
+	font-size:1.5em;
+	background:#00e673;
+	border:1px #888;
+}
+
+.btn-success.raised {
+	box-shadow: 3px 3px 0 0 #006622;
+}
+
+.btn-success.raised:active, .btn-success.raised.active {
+	background: #33a6cc;
+	box-shadow: none;
+	margin-bottom: -3px;
+	margin-top: 3px;
+}
+
+.jumbotron{
+	background-color: #ffffff;
+	padding-bottom: 20px;
+	margin: auto;
+}
+
+#dog{
+	margin-left: 0px;
+	padding: -20px;
+	width: 70%;
+	min-width: 50px;
+	max-width: 200px;
+
+}
+
+.rainbow{
+	text-align: left;
+}
+
+#tagline{
+	margin: -20px 0px 0px 0px;
+
+	text-align: left;
+}
+
+.navbar{
+	background-color: #ffc966;
 }
 
 #login-dp{
@@ -71,3 +138,34 @@ h3 {
 }
 
 /* I had to do this weird margin shift to overwrite the original btn-primary settings*/
+
+#fetchGame {
+	margin: 20px;
+}
+
+/* Header color changer! */ 
+.rainbow span:nth-child(7n+1):hover {
+	color: #ffc100;
+}
+.rainbow span:nth-child(7n+2):hover {
+	color: #ff9a00;
+}
+.rainbow span:nth-child(7n+3):hover{
+	color: #b20000;
+}
+.rainbow span:nth-child(7n+4):hover{
+	color: #007485;
+}
+.rainbow span:nth-child(7n+5):hover{
+	color: #03690a;
+}
+.rainbow span:nth-child(7n+6):hover{
+	color: #442270;
+}
+.rainbow span:nth-child(7n+7):hover{
+	color: #37addb
+}
+
+#signup-nav {
+	padding: 10px 20px 10px 20px;
+}

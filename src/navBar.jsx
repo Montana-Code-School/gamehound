@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class NavBar extends React.Component {
 
 
@@ -16,13 +15,12 @@ render() {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">Gamehound</a>
+            <a className="navbar-brand" href="/">Gamehound</a>
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li className="active"><a href="#">About<span className="sr-only">(current)</span></a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li className="active"><a href="/">Home<span className="sr-only">(current)</span></a></li>
             </ul>
 
             <ul className="nav navbar-nav navbar-right">
@@ -40,21 +38,21 @@ render() {
                   <ul id="login-dp" className="dropdown-menu">
                     <li>
                      <div className="row">
-                        <div className="col-md-12">
-                           <form className="form" role="form" method="post" action="signup" accept-charset="UTF-8" id="signup-nav">
+
+                           <form className="form" role="form" method="post" action="signup" id="signup-nav">
                               <div className="form-group">
-                                 <label className="sr-only" for="exampleInputEmail2">Email address</label>
-                                 <input type="email" className="form-control" id="exampleInputEmail2" placeholder="Email address" required/>
+                                 <label className="sr-only" >Username</label>
+                                 <input type="text" className="form-control" id="exampleInputEmail2" placeholder="Username" required/>
                               </div>
                               <div className="form-group">
-                                 <label className="sr-only" for="exampleInputPassword2">Password</label>
+                                 <label className="sr-only" >Password</label>
                                  <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Password" required/>            
                               </div>
                               <div className="form-group" id="signup-btn">
                                  <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                               </div>
                            </form>
-                        </div>
+
                      </div>
                     </li>
                   </ul>
