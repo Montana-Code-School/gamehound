@@ -37,49 +37,28 @@ class RenderedGames extends React.Component {
 		    		   numPlayers: undefined
 		    		}) 
 	}
-
-  gameArraySplit(arr){
-    var renderedGamesSplit = []
-    var numSplits = !(arr.length % 10) ? arr.length/10 : Math.ceil(arr.length/10)
-    for (var i=0; i < numSplits; i++){
-      renderedGamesSplit.push(arr.slice(i*10, (i*10)+10))
-    }
-    console.log("array of splitted games", renderedGamesSplit)
-    return renderedGamesSplit
-  }
 	
 	render(){
     var carouselId = 0;
-    var renderedSplitArray = this.gameArraySplit(this.props.renderedGames)
     var self = this;
-    console.log('Params', _.get(this, 'props.params'))
     var page = _.get(this, 'props.params.page') || 1
     var numPerPage = 10
-    console.log('DO ALL THE MATHS', Math.floor(self.props.renderedGames.length / numPerPage))
-    console.log("This is a list of our games", this.props.renderedGames.map((game)=> game.gameName ))
 		return (
     			<div>
             <nav aria-label="Page navigation">
               <ul className="pagination">
                 <li>
-                  <a href="#" aria-label="Previous">
+                  <Link to={`/results/${page-1 ? page -1 : page }`}>
                     <span aria-hidden="true">&laquo;</span>
-                  </a>
+                  </Link>
                 </li>
-
-
                 {
                   _.range(1, Math.ceil(self.props.renderedGames.length / numPerPage) + 1).map((x) => <li><Link to={`/results/${x}`}>{x}</Link></li>)
                 }
-
-
-
-
-                
                 <li>
-                  <a href="#" aria-label="Next">
+                  <Link to={`/results/${parseInt(page) + 1 > Math.ceil(self.props.renderedGames.length / numPerPage) ? page : parseInt(page) + 1}`}>
                     <span aria-hidden="true">&raquo;</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
