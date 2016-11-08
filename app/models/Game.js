@@ -137,7 +137,6 @@ function typeScoreCalc(userType, gameTypeArr) { //always call with bracket notat
 
 
 function scoreGame(difficulty, numPlayers, time, type, game) {
-	console.log(arguments)
 	var score = []
 
 	if(difficulty !== undefined){

@@ -31,7 +31,7 @@ class GameFilter extends React.Component {
 	render() {
         	var btn = "btn btn-primary btn-lg raised";
 	        		return (<div>
-			        			
+			        			<div className="container col-centered">
 								<button type="button" className="btn btn-success btn-lg raised"  data-toggle="modal" data-target="#myModal">
 								  Instructions
 								</button>
@@ -43,10 +43,11 @@ class GameFilter extends React.Component {
 								        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
 								          <span aria-hidden="true">&times;</span>
 								        </button>
-								        <h4 className="modal-title" id="myModalLabel">How to use Gamehound:</h4>
+								        <h4 className="modal-title" id="myModalLabel">How to Use Gamehound</h4>
 								      </div>
 								      <div className="modal-body">
-								        Looking for a game to play? Answer our four questions on the main page for a filtered list of games you might enjoy. 
+								        Looking for a game to play? Answer any or all of the four questions on the main page and we will find the best matching game for you. Games are ranked by our search algorithm and served to you in order of relevance.
+
 								      </div>
 								      <div className="modal-footer">
 								        <button type="button" className="btn btn-primary" data-dismiss="modal">Let's Play!</button>
@@ -55,7 +56,7 @@ class GameFilter extends React.Component {
 								  </div>
 								</div>
 
-			        			<div className="container col-centered">
+			        			
 			        				<h2>How many people are playing?</h2>
 			        				<div className="btn-group" data-toggle="buttons">
 			        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
@@ -69,7 +70,6 @@ class GameFilter extends React.Component {
 
 								<h2>What type(s) of game would you like to play?</h2>
 								<div className="row">
-									<div className="text-center">
 										<div className="btn-group" data-toggle="buttons">
 										{["Icebreaker", 
 										  'Card', 
@@ -84,7 +84,7 @@ class GameFilter extends React.Component {
 										  </label>))
 									    }
 							
-										</div>
+										
 									</div>
 								</div>
 								<h2>How long would you like the game to be?</h2>

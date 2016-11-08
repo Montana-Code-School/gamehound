@@ -24,7 +24,6 @@ module.exports = function(app, passport) {
 	})
 
     app.post('/api/game/recommend', function(req, res){
-        console.log('wreck dat body, ', req.body)
         Game.createFilterScore({difficulty:req.body.difficulty,
             type:req.body.type.list,
             numPlayers:req.body.numPlayers,

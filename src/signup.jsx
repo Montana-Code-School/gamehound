@@ -18,7 +18,6 @@ class SignUp extends React.Component{
 										password: this.state.password	
 										},
 										response => {
-											console.log(response.flash)
 											this.setError(response.flash);
 											this.props.setLogin(response);								
 										})

@@ -44,7 +44,6 @@ class FunAdvisorApp extends React.Component {
     }
 
     getGame(difficulty, type, numPlayers, time){
-      console.log("This is the type", type)
       request('/api/game/recommend', "POST", {
                                   difficulty: difficulty,
                                   type: type,
@@ -61,7 +60,6 @@ class FunAdvisorApp extends React.Component {
     }
 
     render() {
-        console.log('logged in ', this.state.loggedIn)
     return (<Router history = {browserHistory}>
         <Route path="/" component={(props) => <Header children={props.children} setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn}/>}>
             <IndexRoute component={() => <GameFilter getGame={this.getGame.bind(this)} /> }/>

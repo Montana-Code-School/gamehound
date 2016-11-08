@@ -65,7 +65,6 @@ class Login extends React.Component {
   // }
 
   render() {
-    console.log("props ", this.props.loggedIn)
     if(!this.props.loggedIn){
       return (      
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

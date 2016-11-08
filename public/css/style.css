@@ -57,7 +57,7 @@ h3 {
 	background:#00b33c;
 	border:1px #888;
 	border-radius: 1px;
-	margin: 15px;
+	margin-top: 15px;
 }
 
 .btn-success:hover {
@@ -139,7 +139,7 @@ h3 {
 /* I had to do this weird margin shift to overwrite the original btn-primary settings*/
 
 #fetchGame {
-	margin: 20px;
+	margin-top: 20px;
 }
 
 /* Header color changer! */ 

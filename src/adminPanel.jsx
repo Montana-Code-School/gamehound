@@ -39,15 +39,12 @@ class AdminPanel extends React.Component{
 
 // This definitely needs some work, currently nonfunctioning. For HTML fields key: "value",  onKeyPress={this.add.bind(this)}
 	// add(event){ 
-	// 	console.log("does this happen first?")
  //         if(event.charCode === 13){
  //            event.preventDefault()
  //            this.stateToggler(this.state.item, "itemsNeeded");
- //            console.log("we made it down here")
  //         } else if (event.charCode === 13 && this.state.instruction){
  //            event.preventDefault()
  //            this.stateToggler(this.state.instruction, "tutorial");
- //            console.log("we made it in the second else statement")
  //         }
  //    }
 
@@ -55,7 +52,6 @@ class AdminPanel extends React.Component{
 		var stateUpdate = {}
 		if(stateName === "tutorial" || stateName === "itemsNeeded"){ // this is hard coded... is there a better way? 
 			stateName === "tutorial" ? this.refs.tutorial.value = "" : this.refs.itemsNeeded.value = "" // this needs to change if you add more states to this function
-			console.log("we made it past the setting the value blank")
 			stateUpdate[stateName] = this.state[stateName].addToTextList(newInput)
 			this.setState(stateUpdate)
 

@@ -5,7 +5,6 @@ import NavBar from './navBar.jsx'
 class Header extends React.Component {
 
 	render(){
-		console.log(this.props.children)
 	    return (
 	    		
 	    	<div className="container">

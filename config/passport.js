@@ -37,7 +37,6 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) { // callback with username and password from our form
-        console.log('in callback', username, password)
         // find a user whose username is throwse same as the forms username
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'username' :  username }, function(err, user) {
