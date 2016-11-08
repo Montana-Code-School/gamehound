@@ -63,6 +63,7 @@ class FunAdvisorApp extends React.Component {
         <Route path="/" component={(props) => <Header children={props.children} setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn}/>}>
             <IndexRoute component={() => <GameFilter getGame={this.getGame.bind(this)} /> }/>
             <Route path='results' component={() =>  <RenderedGames renderedGames={this.state.renderedGames} /> } /> 
+            <Route path='results/:page' component={(props) =>  <RenderedGames params={props.params} renderedGames={this.state.renderedGames} /> } /> 
             <Route path="game/:gameId" component={Header}/>
             <Route path="login" component={() => <Login setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} /> } />
             <Route path="signup" component={SignUp}/>

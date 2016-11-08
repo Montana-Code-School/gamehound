@@ -29,7 +29,7 @@ class GameFilter extends React.Component {
   	}
 
 	render() {
-        	var btn = "btn btn-primary btn-lg raised";
+        	var btn = "btn btn-primary btn-lg";
 	        		return (<div>
 			        			<div className="container col-centered">
 								<button type="button" className="btn btn-success btn-lg raised"  data-toggle="modal" data-target="#myModal">
