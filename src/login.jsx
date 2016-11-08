@@ -89,6 +89,7 @@ class Login extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               
               <li form className="navbar-form navbar-right" role="search">
+                <button type="submit" className="btn btn-default createButton" onClick={()=>browserHistory.push('/adminPanel')}>Create Game</button>
                 <button type="submit" className="btn btn-default" onClick={this.logOut.bind(this)}>Logout</button>
               </li> 
               
