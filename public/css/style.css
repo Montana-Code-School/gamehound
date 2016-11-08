@@ -211,9 +211,12 @@ h3 {
 	margin-left: 5px;
 }
 .carousel-caption {
-	font-size:2.5em;
+	font-size:1.7em;
 	color:#000;
 	text-shadow:none;
+	text-align: left;
+	top: 40%;
+	transform: translateY(-50%);
 
 }
 

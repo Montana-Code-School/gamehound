@@ -23,7 +23,7 @@ gameSchema.statics.createFilterScore = function(userInput, callback) {
 		} else {
 			var sortedGames = games
 			.filter(game => {
-				return !((userInput.type.indexOf('Drinking') !== -1 && game.type.indexOf('Roadtrip') !== -1)) || (userInput.type.indexOf('Roadtrip') !== -1 && game.type.indexOf('Drinking') !== -1)
+				return !(((userInput.type.indexOf('Drinking') !== -1 && game.type.indexOf('Roadtrip') !== -1)) || ((userInput.type.indexOf('Roadtrip') !== -1 && game.type.indexOf('Drinking') !== -1)))
 			})
 			.map(function(game) {
 				return scoreGame(userInput.difficulty, userInput.numPlayers, userInput.time, userInput.type, game)
