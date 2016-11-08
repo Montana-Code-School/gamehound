@@ -14,7 +14,6 @@ var gameSchema = mongoose.Schema({
 	difficulty: String
 })
 
-//write filter methods here to pick user game
 													
 gameSchema.statics.createFilterScore = function(userInput, callback) {
 	this.find(function(err, games) {
@@ -22,7 +21,11 @@ gameSchema.statics.createFilterScore = function(userInput, callback) {
 		if (err) {
 			callback(err)
 		} else {
-			var sortedGames = games.map(function(game) {
+			var sortedGames = games
+			.filter(game => {
+				return !((userInput.type.indexOf('Drinking') !== -1 && game.type.indexOf('Roadtrip') !== -1)) || (userInput.type.indexOf('Roadtrip') !== -1 && game.type.indexOf('Drinking') !== -1)
+			})
+			.map(function(game) {
 				return scoreGame(userInput.difficulty, userInput.numPlayers, userInput.time, userInput.type, game)
 			}).sort(function(game1, game2) {
 				return game2.totalScore - game1.totalScore
@@ -155,6 +158,7 @@ function scoreGame(difficulty, numPlayers, time, type, game) {
 	if (type !== undefined && type.length !== 0){
 		score.push(typeScoreCalc(type, game.type) || 0)
 	}
+
 	if(numPlayers !== undefined){
 		var numPlayersArr = [1,2,3,4,5,8]
 		var numPlayersDistance  = squareArrDistance(numPlayersArr, numPlayers, game.numPlayers)

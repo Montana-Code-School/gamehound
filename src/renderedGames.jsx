@@ -91,15 +91,15 @@ class RenderedGames extends React.Component {
                                 <div id={"tutorial-carousel" + carouselId} className="carousel slide" data-ride="carousel">
                                   <div className="carousel-inner">
                                     <div className="item active">
-                                     <img className="img-responsive" src="http://placehold.it/1200x600/555/000&text=One" alt="..." />
+                                     <img className="img-responsive" src="http://placehold.it/1200x600/eee/000&text=&nbsp;" alt="..." />
                                       <div className="carousel-caption">
                                         {game.tutorial[0]}
                                       </div>
                                     </div>
                                   {game.tutorial.slice(1,game.tutorial.length).map(function(instruction) {
                                       return (<div className="item">
-                                      <img className="img-responsive" src="http://placehold.it/1200x600/fffccc/000&text=Two" alt="..." />
-                                      <div className="renderedGame">
+                                      <img className="img-responsive" src="http://placehold.it/1200x600/eee/000&text=&nbsp;" alt="..." />
+                                      <div className="carousel-caption">
                                           {instruction}
                                       </div>
                                     </div>)
