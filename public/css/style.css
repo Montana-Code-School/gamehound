@@ -52,6 +52,18 @@ h3 {
 	box-shadow: 3px 3px 0 0 #ffe066;
 }
 
+.btn-warning{
+	font-size:1.5em;
+	background:#FF5719;
+	border:1px #888;
+	border-radius: 1px;
+	margin-top: 15px;
+}
+
+.btn-warning.raised {
+	box-shadow: 3px 3px 0 0 #990000;
+}
+
 .btn-success {
 	font-size:1.5em;
 	background:#00b33c;
@@ -62,7 +74,7 @@ h3 {
 
 .btn-success:hover {
 	font-size:1.5em;
-	background:#00e673;
+	background:#007f00;
 	border:1px #888;
 }
 
@@ -91,7 +103,6 @@ h3 {
 	max-width: 200px;
 
 }
-
 
 .rainbow{
 	text-align: left;
@@ -188,6 +199,17 @@ h3 {
 	margin:30px 0;
 }
 
+.createButton{
+	margin-right: 5px
+}
+
+#submitButton{
+	margin-right: 20px;
+}
+
+#tutorialBtn{
+	margin-left: 5px;
+}
 .carousel-caption {
 	font-size:2.5em;
 	color:#000;

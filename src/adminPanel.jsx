@@ -65,9 +65,27 @@ class AdminPanel extends React.Component{
 		var arraysToMap = 'state.' + stateName + '.list'
 		const textList = _.get(this, arraysToMap)
 		if(textList.length !== 0) {
-			return textList.map(text => <li>{text}</li>)
+			return textList.map(text => {
+				return (<li>{text}
+				<button type="button" className="btn btn-secondary btn-sm" id="tutorialBtn" onClick={()=>this.callRemoveText(stateName, text)}>X</button>
+				</li>)
+			})
 		}
 	}
+
+	callRemoveText(nameOfState, textItem){
+		var stateUpdate = {}
+		stateUpdate[nameOfState] = this.state[nameOfState].removeTextFromList(textItem)
+		this.setState(stateUpdate)
+	}
+
+	// removeItemFromList(stateArray, textItem, nameOfState){
+	//     var instructionIndex = stateArray.indexOf(textItem);
+	//   	// console.log("The state array, ", this.state.tutorial.list)
+	//     stateArray.splice(instructionIndex, 1)
+	//     console.log("The textlist array, ", stateArray)
+	//     return this.setState({nameOfState: stateArray})
+	// }
 
 	clearState() {
 		this.setState({tutorial:new ToggleList(),
@@ -79,7 +97,7 @@ class AdminPanel extends React.Component{
 	}
 
 	render(){
-		var btn = "btn btn-primary";
+		var btn = "btn btn-primary btn-lg raised";
 		if(this.props.loggedIn){
 			if(!this.state.gamePostSuccess){
 		        return  (<div className="container">
@@ -146,8 +164,10 @@ class AdminPanel extends React.Component{
 						 		<ul>
 						 		{this.mapTextList('itemsNeeded')}
 						 		</ul>
-						 		<textarea ref="itemsNeeded" onChange={(e)=>this.setState({item:e.target.value})} cols="50"></textarea>
-						 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
+						 		<div>
+						 			<textarea ref="itemsNeeded" onChange={(e)=>this.setState({item:e.target.value})} cols="50"></textarea>
+						 		</div>
+						 		<button className="btn btn-success btn-lg raised" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
 						 	</div>
 
 						 	<h2>Tutorial</h2>
@@ -156,8 +176,10 @@ class AdminPanel extends React.Component{
 						 		<ol>
 						 		{this.mapTextList('tutorial')}
 						 		</ol>
-						 		<textarea ref="tutorial" onChange={(e)=>this.setState({instruction:e.target.value})} rows="4" cols="100"></textarea>
-						 		<button className="btn btn-success" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
+						 		<div>
+						 			<textarea ref="tutorial" onChange={(e)=>this.setState({instruction:e.target.value})} rows="4" cols="100"></textarea>
+						 		</div>
+						 		<button className="btn btn-success btn-lg raised" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
 						 	</div>
 
 						 	<h2>Rating</h2>
@@ -182,15 +204,15 @@ class AdminPanel extends React.Component{
 						 	</div>
 
 						 	<div>
-						 		<button className="btn btn-success" onClick={this.createGame.bind(this)}>Submit Game</button>
-						 		<button className="btn btn-warning" onClick={()=>this.setState({tutorial: new ToggleList})}>Clear Everything Forever</button>
+						 		<button className="btn btn-success btn-lg raised" id="submitButton" onClick={this.createGame.bind(this)}>Submit Game</button>
+						 		<button className="btn btn-warning btn-lg raised" onClick={()=>this.setState({tutorial: new ToggleList})}>Clear</button>
 
 						 	</div>
 		                </div>)
 		    } else {
 		    	return (<div>
 		    				<h2>Congrats! You have submitted a game!</h2>
-		    				<button className="btn btn-success" onClick={()=>this.setState({gamePostSuccess: false})}>Create Another Game</button>
+		    				<button className="btn btn-success btn-lg raised" onClick={()=>this.setState({gamePostSuccess: false})}>Create Another Game</button>
 		    			</div>)
 		    } 
 		} else {

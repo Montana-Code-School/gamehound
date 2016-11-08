@@ -19,5 +19,12 @@ ToggleList.prototype.addToTextList = function(newInput){
 	return new ToggleList(this.list.concat(newInput));
 }
 
+ToggleList.prototype.removeTextFromList = function(textItem){
+	var itemIndex = this.list.indexOf(textItem);
+	var newArray = this.list.slice()
+	newArray.splice(itemIndex,1)
+	return new ToggleList(newArray)
+}
+
 
 module.exports = ToggleList
