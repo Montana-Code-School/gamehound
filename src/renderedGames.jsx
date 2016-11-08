@@ -42,10 +42,11 @@ class RenderedGames extends React.Component {
 	render(){
     var carouselId = 0;
     var self = this;
+    console.log("This is a list of our games", this.props.renderedGames.map((game)=> game.gameName ))
 		return (
     			<div>
       			<div>
-      				<button className="btn btn-success" onClick={() => browserHistory.push('/')}>Search Again</button>
+      				<button className="btn btn-success btn-lg raised" onClick={() => browserHistory.push('/')}>Search Again</button>
     			</div>
       			<ul className="list-group">
       				{(this.props.renderedGames|| []).map(function(game) { 
@@ -82,7 +83,7 @@ class RenderedGames extends React.Component {
                         <div className="col-md-8">
 
 
-                          <button className="btn btn-success" data-toggle="modal" data-target={".tutorial-modal" + carouselId}>How to Play -></button>
+                          <button className="btn btn-success btn-lg raised" data-toggle="modal" data-target={".tutorial-modal" + carouselId}>How to Play -></button>
 
                           <div className={"modal fade tutorial-modal" + carouselId} tabIndex="-1" role="dialog" aria-labelledby="largeTutorialModal" aria-hidden="true">
                             <div className="modal-dialog modal-lg">

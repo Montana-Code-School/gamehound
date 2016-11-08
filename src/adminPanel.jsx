@@ -65,9 +65,27 @@ class AdminPanel extends React.Component{
 		var arraysToMap = 'state.' + stateName + '.list'
 		const textList = _.get(this, arraysToMap)
 		if(textList.length !== 0) {
-			return textList.map(text => <li>{text}</li>)
+			return textList.map(text => {
+				return (<li>{text}
+				<button type="button" className="btn btn-secondary btn-sm" id="tutorialBtn" onClick={()=>this.callRemoveText(stateName, text)}>X</button>
+				</li>)
+			})
 		}
 	}
+
+	callRemoveText(nameOfState, textItem){
+		var stateUpdate = {}
+		stateUpdate[nameOfState] = this.state[nameOfState].removeTextFromList(textItem)
+		this.setState(stateUpdate)
+	}
+
+	// removeItemFromList(stateArray, textItem, nameOfState){
+	//     var instructionIndex = stateArray.indexOf(textItem);
+	//   	// console.log("The state array, ", this.state.tutorial.list)
+	//     stateArray.splice(instructionIndex, 1)
+	//     console.log("The textlist array, ", stateArray)
+	//     return this.setState({nameOfState: stateArray})
+	// }
 
 	clearState() {
 		this.setState({tutorial:new ToggleList(),
