@@ -21,8 +21,18 @@ class NavBar extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="/">Gamehound</a>
-            </div>
+
+              <a href="/">
+                <img src="/imgs/bassetgif.gif" id="dog" className="col-lg-4 col-md-4 col-sm-4 col-xs-4"/>
+              </a>
+              <div className="col-lg-4 col-sm-4 col-xs-4 rainbow">
+                <a href="/">
+                  <h1>
+                    {"Gamehound".split("").map(letter=> <span className="rainbow">{letter}</span> )}
+                  </h1>
+                </a>
+                </div>            
+              </div>
             <Login setLogin={this.props.setLogin} loggedIn={this.props.loggedIn}/>
           </div>
         </nav>

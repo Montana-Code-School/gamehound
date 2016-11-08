@@ -63,7 +63,7 @@ class RenderedGames extends React.Component {
               </ul>
             </nav>
       			<div>
-      				<button className="btn btn-success btn-lg raised" onClick={() => browserHistory.push('/')}>Search Again</button>
+      				<button className="btn btn-success btn-lg" onClick={() => browserHistory.push('/')}>Search Again</button>
     			</div>
       			<ul className="list-group">
       				{(this.props.renderedGames.slice((page-1) * numPerPage, (page) * numPerPage)|| []).map(function(game) { 
@@ -99,7 +99,7 @@ class RenderedGames extends React.Component {
                           <div className="col-md-8">
 
 
-                            <button className="btn btn-success btn-lg raised" data-toggle="modal" data-target={".tutorial-modal" + carouselId}>How to Play -></button>
+                            <button className="btn btn-success btn-lg" data-toggle="modal" data-target={".tutorial-modal" + carouselId}>How to Play -></button>
 
                             <div className={"modal fade tutorial-modal" + carouselId} tabIndex="-1" role="dialog" aria-labelledby="largeTutorialModal" aria-hidden="true">
                               <div className="modal-dialog modal-lg">
@@ -109,14 +109,14 @@ class RenderedGames extends React.Component {
                                       <div className="item active">
                                        <img className="img-responsive" src="http://placehold.it/1200x800/eee/000&text=&nbsp;" alt="..." />
                                         <div className="carousel-caption">
-                                          {game.tutorial[0]}
+                                          1. {game.tutorial[0]}
                                         </div>
                                       </div>
                                     {game.tutorial.slice(1,game.tutorial.length).map(function(instruction) {
                                         return (<div className="item">
                                         <img className="img-responsive" src="http://placehold.it/1200x800/eee/000&text=&nbsp;" alt="..." />
                                         <div className="carousel-caption">
-                                            {instruction}
+                                          {game.tutorial.indexOf(instruction) + 1}. {instruction}
                                         </div>
                                       </div>)
 
