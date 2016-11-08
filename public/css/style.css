@@ -1,5 +1,10 @@
-* {
-	font-family:'Noto Sans',sans-serif;
+h2, h3 {
+	font-family:'Patua One',sans-serif;
+	font-weight:lighter;
+}
+
+.btn {
+	font-family:'Noto Sans', sans-serif;
 }
 
 body {
@@ -8,7 +13,8 @@ body {
 }
 
 h1 {
-	font-family:'Lora',serif;
+	font-family:'Patua One',serif;
+	font-size:3.5em;
 	font-weight:bold;
 }
 
@@ -18,6 +24,11 @@ h2 {
 
 h3 {
 	font-size:1.6em;
+}
+
+a {
+	color:inherit !important;
+	text-decoration:inherit !important;
 }
 
 .container {
@@ -37,19 +48,8 @@ h3 {
 	padding:10px;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .active {
 	background:#ffc100;
-}
-
-.btn-primary.raised {
-	box-shadow: 3px 3px 0 0 #007299;
-}
-
-.btn-primary.raised:active, .btn-primary.raised.active {
-	background: #ffc100;
-	margin-bottom: -3px;
-	margin-top: 3px;
-	box-shadow: 3px 3px 0 0 #ffe066;
 }
 
 .btn-warning{
@@ -69,7 +69,6 @@ h3 {
 	background:#00b33c;
 	border:1px #888;
 	border-radius: 1px;
-	margin-top: 15px;
 }
 
 .btn-success:hover {
@@ -96,15 +95,16 @@ h3 {
 }
 
 #dog{
-	margin-left: 0px;
-	padding: -20px;
+	
 	width: 70%;
 	min-width: 50px;
-	max-width: 200px;
+	max-width: 180px;
+	padding:10px;
 
 }
 
 .rainbow{
+	font-face:'Lora';
 	text-align: left;
 }
 
@@ -149,11 +149,7 @@ h3 {
 	margin: 0px 15px 0px -15px;
 }
 
-/* I had to do this weird margin shift to overwrite the original btn-primary settings*/
 
-#fetchGame {
-	margin-top: 20px;
-}
 
 /* Header color changer! */ 
 .rainbow span:nth-child(7n+1):hover {
@@ -212,6 +208,7 @@ h3 {
 #tutorialBtn{
 	margin-left: 5px;
 }
+
 .carousel-caption {
 	font-size:1.7em;
 	color:#000;

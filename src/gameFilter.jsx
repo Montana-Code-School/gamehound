@@ -31,31 +31,7 @@ class GameFilter extends React.Component {
 	render() {
         	var btn = "btn btn-primary btn-lg";
 	        		return (<div>
-			        			<div className="container col-centered">
-								<button type="button" className="btn btn-success btn-lg raised"  data-toggle="modal" data-target="#myModal">
-								  Instructions
-								</button>
-
-								<div className="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								  <div className="modal-dialog" role="document">
-								    <div className="modal-content">
-								      <div className="modal-header">
-								        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-								          <span aria-hidden="true">&times;</span>
-								        </button>
-								        <h4 className="modal-title" id="myModalLabel">How to Use Gamehound</h4>
-								      </div>
-								      <div className="modal-body">
-								        Looking for a game to play? Answer any or all of the four questions on the main page and we will find the best matching game for you. Games are ranked by our search algorithm and served to you in order of relevance.
-
-								      </div>
-								      <div className="modal-footer">
-								        <button type="button" className="btn btn-primary" data-dismiss="modal">Let's Play!</button>
-								      </div>
-								    </div>
-								  </div>
-								</div>
-
+			        			
 			        			
 			        				<h2>How many people are playing?</h2>
 			        				<div className="btn-group" data-toggle="buttons">
@@ -110,10 +86,37 @@ class GameFilter extends React.Component {
 										  </label>)
 									})}
 							 	</div>
+							 	<div className="row">
+								 	<div className="col-md-3 col-lg-3">
+								 		<button className="btn btn-success btn-lg" onClick={this.fetchButtonClicked.bind(this)}>Fetch Me A Game!</button>
+								 	</div>
 
-							 	<div id="fetchGame">
-							 		<button className="btn btn-success btn-lg raised" onClick={this.fetchButtonClicked.bind(this)}>Fetch Me A Game!</button>
-							 	</div>
+								 	<div className="col-md-3 col-lg-3">
+									<button type="button" className="btn btn-success btn-lg"  data-toggle="modal" data-target="#myModal">
+									  Instructions
+									</button>
+
+								</div>
+									<div className="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									  <div className="modal-dialog" role="document">
+									    <div className="modal-content">
+									      <div className="modal-header">
+									        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									        <h4 className="modal-title" id="myModalLabel">How to Use Gamehound</h4>
+									      </div>
+									      <div className="modal-body">
+									        Looking for a game to play? Answer any or all of the four questions on the main page and we will find the best matching game for you. Games are ranked by our search algorithm and served to you in order of relevance.
+
+									      </div>
+									      <div className="modal-footer">
+									        <button type="button" className="btn btn-primary" data-dismiss="modal">Let's Play!</button>
+									      </div>
+
+									  </div>
+									</div>
+								</div>
 			                </div>
 			            </div>
 			     )		
