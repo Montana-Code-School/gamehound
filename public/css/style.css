@@ -63,6 +63,10 @@ a {
 	box-shadow: 3px 3px 0 0 #990000;
 }
 
+.btn-warning:hover {
+	background:#cc0000;
+}
+
 .btn-success {
 	font-size:1.5em;
 	background:#00b33c;
