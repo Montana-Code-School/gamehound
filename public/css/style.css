@@ -57,7 +57,6 @@ a {
 	background:#FF5719;
 	border:1px #888;
 	border-radius: 1px;
-	margin-top: 15px;
 }
 
 .btn-warning.raised {
@@ -88,11 +87,11 @@ a {
 	margin-top: 3px;
 }
 
-.jumbotron{
+/*.jumbotron{
 	background-color: #ffffff;
 	padding-bottom: 20px;
 	margin: auto;
-}
+}*/
 
 #dog{
 	
@@ -117,7 +116,7 @@ a {
 .navbar{
 	background-color: #ffc966;
 }
-
+/*
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
@@ -143,12 +142,11 @@ a {
         background-color: inherit;
         color: #fff;
     }
-} 
+} */
 
 #signup-btn {
 	margin: 0px 15px 0px -15px;
 }
-
 
 
 /* Header color changer! */ 
@@ -217,5 +215,9 @@ h3 {
 	top: 40%;
 	transform: translateY(-50%);
 
+}
+
+.pageHeader {
+	font-size: 3em;
 }
 
