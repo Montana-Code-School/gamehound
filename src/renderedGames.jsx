@@ -39,7 +39,8 @@ class RenderedGames extends React.Component {
 	}
 	
 	render(){
-    var carouselId = 0;
+    var carouselId = 1;
+    var carouselIndex = 1;
     var self = this;
     var page = _.get(this, 'props.params.page') || 1
     var numPerPage = 10
@@ -68,6 +69,7 @@ class RenderedGames extends React.Component {
       			<ul className="list-group">
       				{(this.props.renderedGames.slice((page-1) * numPerPage, (page) * numPerPage)|| []).map(function(game) { 
                   carouselId++;
+                  carouselIndex = 0
                   return (
                     <div className="container">
 
@@ -105,6 +107,14 @@ class RenderedGames extends React.Component {
                               <div className="modal-dialog modal-lg">
                                 <div className="modal-content">
                                   <div id={"tutorial-carousel" + carouselId} className="carousel slide" data-ride="carousel">
+                                      <ol className="carousel-indicators">
+                                        <li data-target={"#tutorial-carousel" + carouselId} data-slide-to={(carouselIndex).toString()} className="active"></li>
+                                        {game.tutorial.slice(1,game.tutorial.length).map(function(x){
+                                          return (
+                                            <li data-target={"#tutorial-carousel" + carouselId} data-slide-to={(++carouselIndex).toString()} ></li>)
+                                          }) 
+                                        }
+                                      </ol>
                                     <div className="carousel-inner">
                                       <div className="item active">
                                        <img className="img-responsive" src="https://placehold.it/1200x800/eee/000&text=&nbsp;" alt="..." />
@@ -119,15 +129,8 @@ class RenderedGames extends React.Component {
                                           {game.tutorial.indexOf(instruction) + 1}. {instruction}
                                         </div>
                                       </div>)
-
-
                                     })}
-                                      
-
-
-
                                     </div>
-
                                   <a className="left carousel-control" href={"#tutorial-carousel" + carouselId} role="button" data-slide="prev">
                                     <span className="glyphicon glyphicon-chevron-left"></span>
                                   </a>

@@ -119,6 +119,10 @@ primary - blue buttons, success - green, warning - yellow */
 	border-radius: 1px;
 }
 
+.btn-warning:hover {
+	background:#cc0000;
+}
+
 .btn-success {
 	font-size:1.5em;
 	padding:10px 20px;
