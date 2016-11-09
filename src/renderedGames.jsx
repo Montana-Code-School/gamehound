@@ -40,7 +40,7 @@ class RenderedGames extends React.Component {
 	
 	render(){
     var carouselId = 1;
-    var carouselIndex = 1;
+    var carouselIndex = 0;
     var self = this;
     var page = _.get(this, 'props.params.page') || 1
     var numPerPage = 10

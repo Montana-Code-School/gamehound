@@ -35,6 +35,11 @@ h3 {
 	font-size:1.6em;
 }
 
+.list-group {
+    webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 a {
 	color:inherit !important;
 	text-decoration:inherit !important;
@@ -70,18 +75,11 @@ a {
 }
 
 
-
-
-
-
-
 /* This is a bad way to make user login/creategame & logout buttons centered-ish with logo */
 
 .centered-with-logo {
     line-height: 70px;
 }
-
-
 
 /* Overriding some Bootstrap button defaults 
 primary - blue buttons, success - green, warning - yellow */
@@ -181,28 +179,8 @@ hr.style18:before {
 	color: #37addb
 }
 
-.renderedGame {
-	background-color:#eee;
-	margin: 20px 0;
-	padding:10px;
-}
-
-.renderedResult {
-	font-weight:bold;
-	font-size:1.6em;
-}
-
-.carousel-caption {
-	font-size:1.7em;
-	color:#000;
-	text-shadow:none;
-	text-align: left;
-	top: 40%;
-	transform: translateY(-50%);
-
-}
-
 .pageHeader {
 	font-size: 3em;
+	margin-bottom: 50px;
 }
 

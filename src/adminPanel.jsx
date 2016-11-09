@@ -85,6 +85,7 @@ class AdminPanel extends React.Component{
 
 		        			
 		        			<h1 className="pageHeader">Create a Game</h1>
+
 		        			<h2>Game Name</h2>
 		        				<div>
 		        					<input type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
