@@ -75,18 +75,19 @@ a {
 	transform: translateY(-50%);
 }
 
+.green-percent, .blue-percent, .yellow-percent {
+		font-size:4em;
+}
+
 .green-percent {
-	font-size:3em;
 	color:#007f00;
 }
 
 .blue-percent {
-	font-size:3em;
 	color:#0099cc;
 }
 
 .yellow-percent {
-	font-size:3em;
 	color:#d19e1f;
 }
 
