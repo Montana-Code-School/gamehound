@@ -70,6 +70,9 @@ class RenderedGames extends React.Component {
       				{(this.props.renderedGames.slice((page-1) * numPerPage, (page) * numPerPage)|| []).map(function(game) { 
                   carouselId++;
                   carouselIndex = 0
+
+                  var percentColor = game.totalScore < 80 ? (game.totalScore < 50 ? "yellow-percent" : "blue-percent") : "green-percent";
+
                   return (
                     <div className="container">
 
@@ -81,9 +84,13 @@ class RenderedGames extends React.Component {
                           </div>
                           
                           <div className="col-md-4">
-  								   		    <h4>Percent Match:</h4> <h4 className="renderedResult">{game.totalScore}%</h4>  
+  								   		    <h4>Match:</h4> <h4 className={"renderedResult " + percentColor}>{game.totalScore}%</h4>  
+                      
+
+
                           </div>
                         </div>
+
                         <div className="row">
                           <div className="col-md-5">
                             <h4>Type:</h4> <h4 className="renderedResult">{game.type.join(", ")}</h4>
