@@ -1,4 +1,5 @@
 //this is the individual game that the user has selected to play either in progress or finished
+//Didn't use but would use to assign ratings and saved games..etc
 
 var mongoose = require('mongoose');
 var Game = require('./Game.js');
