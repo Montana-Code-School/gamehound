@@ -205,6 +205,15 @@ hr.style18:before {
 	margin-bottom: 50px;
 }
 
+.carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+}
+
+.carousel-indicators .active {
+  background-color: #666;
+}
+
 @media (max-width: 1200px) {
     .navbar-header {
         float: none;
