@@ -108,11 +108,11 @@ primary - blue buttons, success - green, warning - yellow */
 }
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-	background-color: #ffc100 !important;
-	color:#0099cc;
+	background-color: #fff !important;
+	color:#0099cc !important;
 }
 
-.btn-warning{
+.btn-warning {
 	font-size:1.5em;
 	background:#FF5719;
 	border:1px #888;
