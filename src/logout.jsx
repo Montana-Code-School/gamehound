@@ -1,6 +1,6 @@
 import React from 'react';
 import requests from './request.js'
-
+import {browserHistory} from 'react-router'
 var request = requests.request
 
 
@@ -10,6 +10,7 @@ class Logout extends React.Component {
     request('/logout', "GET", null, response => {
     	this.props.setLogin(response)
 
+        browserHistory.push('/')
     })
   }
 
