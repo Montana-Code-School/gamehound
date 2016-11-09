@@ -26,8 +26,8 @@ h3 {
 
 .renderedGame {
 	background-color:#ddd;
-	margin: 20px 0;
-	padding:10px;
+	margin: 10px 0;
+	padding:30px 50px;
 }
 
 .renderedResult {
@@ -46,7 +46,8 @@ a {
 }
 
 .container {
-	margin: 0px auto 50px auto;
+	margin-bottom: 50px;
+	padding: 0 !important;
 }
 
 .navbar {
@@ -89,7 +90,6 @@ primary - blue buttons, success - green, warning - yellow */
 	box-shadow: 2px 2px 0 0 #bbb;
 	font-family:'Noto Sans', sans-serif;
 
-
 }
 
 .btn-group {
@@ -115,6 +115,7 @@ primary - blue buttons, success - green, warning - yellow */
 	background:#FF5719;
 	border:1px #888;
 	border-radius: 1px;
+	margin-left: 12px;
 }
 
 .btn-warning:hover {
@@ -127,6 +128,11 @@ primary - blue buttons, success - green, warning - yellow */
 	background:#00b33c;
 	border:1px #888;
 	border-radius: 1px;
+	margin-bottom: 10px;
+}
+
+.renderedGame .btn-success {
+	margin-top: 20px;
 }
 
 
@@ -182,5 +188,93 @@ hr.style18:before {
 .pageHeader {
 	font-size: 3em;
 	margin-bottom: 50px;
+}
+
+@media (max-width: 1200px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+   .navbar-nav .open .dropdown-menu {
+       position: static;
+       float: none;
+       width: auto;
+       margin-top: 0;
+       background-color: transparent;
+       border: 0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+    }
+}
+
+@media(max-width: 600px){
+	.dog{
+		display: none;
+	}
+}
+
+@media(max-width: 400px){
+	h1{
+		font-size: 2em;
+	}
+
+	h2{
+		font-size: 1.5em;
+	}
+	h3{
+		font-size: 1em;
+	}
+	h4{
+		font-size: 1em;
+	}
+	.renderedResult{
+		font-size: 1.2em;
+	}
+	.btn{
+		font-size: 1em;
+	}
+	.carousel-caption {
+	font-size:.8em;
+	color:#000;
+	text-shadow:none;
+	text-align: left;
+	top: 30%;
+	transform: translateY(-50%);
+	}
+	.container {
+	margin-bottom: 50px;
+	padding: 0 15px !important;
+}
+
 }
 
