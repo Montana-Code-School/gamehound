@@ -1,15 +1,8 @@
-h2, h3 {
-	font-family:'Patua One',sans-serif;
-	font-weight:lighter;
-}
-
-.btn {
-	font-family:'Noto Sans', sans-serif;
-}
+/* Typography and general colors/margins */
 
 body {
-	background:#fff;
-	padding-top: 20px;
+	background:#eee;
+	margin-top: 20px;
 }
 
 h1 {
@@ -18,11 +11,27 @@ h1 {
 	font-weight:bold;
 }
 
+h2, h3 {
+	font-family:'Patua One',sans-serif;
+	font-weight:lighter;
+}
+
 h2 {
 	font-size:2em;
 }
 
 h3 {
+	font-size:1.6em;
+}
+
+.renderedGame {
+	background-color:#ddd;
+	margin: 20px 0;
+	padding:10px;
+}
+
+.renderedResult {
+	font-weight:bold;
 	font-size:1.6em;
 }
 
@@ -35,12 +44,62 @@ a {
 	margin: 0px auto 50px auto;
 }
 
+.navbar {
+	margin-bottom:50px;
+}
+
+.dog {
+	width: 70%;
+	min-width: 50px;
+	max-width: 180px;
+	padding:10px;
+}
+
+.rainbow {
+	font-face:'Lora';
+	text-align: left;
+}
+
+.carousel-caption {
+	font-size:1.7em;
+	color:#000;
+	text-shadow:none;
+	text-align: left;
+	top: 40%;
+	transform: translateY(-50%);
+}
+
+
+
+
+
+
+
+/* This is a bad way to make user login/creategame & logout buttons centered-ish with logo */
+
+.centered-with-logo {
+    line-height: 70px;
+}
+
+
+
+/* Overriding some Bootstrap button defaults 
+primary - blue buttons, success - green, warning - yellow */
+
+
+.btn {
+	box-shadow: 2px 2px 0 0 #bbb;
+	font-family:'Noto Sans', sans-serif;
+
+
+}
+
 .btn-group {
 	display: inline-block;
 }
 
 .btn-primary {
-	margin: 15px;
+	margin: 12px;
 	background: #0099cc;
     color: #ffffff;
 	border:1px #888;
@@ -48,106 +107,52 @@ a {
 	padding:10px;
 }
 
-.btn-primary:hover, .active {
-	background:#ffc100;
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+	background-color: #fff !important;
+	color:#0099cc !important;
 }
 
-.btn-warning{
+.btn-warning {
 	font-size:1.5em;
 	background:#FF5719;
 	border:1px #888;
 	border-radius: 1px;
 }
 
-.btn-warning.raised {
-	box-shadow: 3px 3px 0 0 #990000;
-}
-
 .btn-success {
 	font-size:1.5em;
+	padding:10px 20px;
 	background:#00b33c;
 	border:1px #888;
 	border-radius: 1px;
 }
 
-.btn-success:hover {
-	font-size:1.5em;
-	background:#007f00;
-	border:1px #888;
+
+.btn-success:hover, .btn-success:active, .btn-success:focus {
+  color: #ffffff !important;
+  background-color: #007f00 !important;
+  border-color: #494F57 !important;
 }
 
-.btn-success.raised {
-	box-shadow: 3px 3px 0 0 #006622;
-}
+/* Horizontal line styling */ 
 
-.btn-success.raised:active, .btn-success.raised.active {
-	background: #33a6cc;
-	box-shadow: none;
-	margin-bottom: -3px;
-	margin-top: 3px;
+hr.style18 { 
+  height: 30px; 
+  border-style: solid; 
+  border-color: #ddd; 
+  border-width: 1px 0 0 0; 
+  border-radius: 20px; 
+} 
+hr.style18:before { 
+  display: block; 
+  content: ""; 
+  height: 30px; 
+  margin-top: -31px; 
+  border-style: solid; 
+  border-color: #ddd; 
+  border-width: 0 0 1px 0; 
+  border-radius: 20px; 
 }
-
-/*.jumbotron{
-	background-color: #ffffff;
-	padding-bottom: 20px;
-	margin: auto;
-}*/
-
-#dog{
-	
-	width: 70%;
-	min-width: 50px;
-	max-width: 180px;
-	padding:10px;
-
-}
-
-.rainbow{
-	font-face:'Lora';
-	text-align: left;
-}
-
-#tagline{
-	margin: -20px 0px 0px 0px;
-
-	text-align: left;
-}
-
-.navbar{
-	background-color: #ffc966;
-}
-/*
-#login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
-    margin: auto;
-}
-#login-dp .help-block{
-    font-size:12px    
-}
-#login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
-}
-#login-dp .form-group {
-    margin-bottom: 10px;
-}
-
-@media(max-width:768px){
-    #login-dp{
-        background-color: inherit;
-        color: #fff;
-    }
-} */
-
-#signup-btn {
-	margin: 0px 15px 0px -15px;
-}
-
 
 /* Header color changer! */ 
 .rainbow span:nth-child(7n+1):hover {
@@ -172,14 +177,6 @@ a {
 	color: #37addb
 }
 
-#signup-nav {
-	padding: 10px 20px 10px 20px;
-}
-
-h3 {
-	font-size:1.6em;
-}
-
 .renderedGame {
 	background-color:#eee;
 	margin: 20px 0;
@@ -189,22 +186,6 @@ h3 {
 .renderedResult {
 	font-weight:bold;
 	font-size:1.6em;
-}
-
-.row {
-	margin:30px 0;
-}
-
-.createButton{
-	margin-right: 5px;
-}
-
-#submitButton{
-	margin-right: 20px;
-}
-
-#tutorialBtn{
-	margin-left: 5px;
 }
 
 .carousel-caption {

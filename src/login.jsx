@@ -34,44 +34,16 @@ class Login extends React.Component {
     })
   }
 
-  // add(event){
-  //        if(event.charCode === 13){
-  //           this.logIn();
-  //        }
-  //    }
-
-  // setError(value){
-  //   this.setState({error:value})
-  // }
-
-  // noUsernameOrPassword(){
-  //     if(_.get(this,'state.showError')){
-  //       if(!this.state.username){
-  //         return <div className="alert alert-danger">Please enter a username.</div>
-
-  //       } 
-  //       if (!this.state.password){
-  //         return <div className="alert alert-danger">Please enter a password.</div>
-  //       }
-  //     }
-  //   }
-
-  // //Need to differentiate the various errors
-  // wrongPassword(){
-  //   if(_.get(this, 'state.error')){ //using lodash here to null check 
-  //     return <div className="alert alert-danger">Incorrect password.</div>
-  //   }
-
-  // }
-
   render() {
     if(!this.props.loggedIn){
       return (      
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
-              <li><span className="navbar-text">
-                Admin Login:
-              </span></li>
+              <li>
+                <span className="navbar-text">
+                  Admin Login:
+                </span>
+              </li>
               <li form className="navbar-form navbar-right" role="search">
                 <div className="form-group">
                     <input type="text" className="form-control" name="username" placeholder="Username" onChange={(e)=>this.setState({username:e.target.value})}/>
@@ -82,22 +54,56 @@ class Login extends React.Component {
                 <button type="submit" className="btn btn-default" onClick={this.logIn.bind(this)}>Login</button>
               </li> 
             </ul>
-          </div> )
+          </div>)
     } else {
       return (
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
-              
-              <li form className="navbar-form navbar-right" role="search">
-                <button type="submit" className="btn btn-default createButton" onClick={()=>browserHistory.push('/adminPanel')}>Create Game</button>
-                <button type="submit" className="btn btn-default" onClick={this.logOut.bind(this)}>Logout</button>
-              </li> 
-              
-            </ul>
-          </div>
-      )
+            <div className="centered-with-logo">
+              <ul className="nav navbar-nav navbar-right">
+                <li form className="navbar-form navbar-right" role="search">
+                  <button type="submit" className="btn btn-default createButton" onClick={()=>browserHistory.push('/adminPanel')}>Create Game</button>
+                  <button type="submit" className="btn btn-default" onClick={this.logOut.bind(this)}>Logout</button>
+                </li>     
+              </ul>
+            </div>
+          </div>)
+      }
     }
   }
-}
 module.exports = Login
+
+
+
+// Work on flash error messages for login that we weren't able to finish
+
+
+// add(event){
+//        if(event.charCode === 13){
+//           this.logIn();
+//        }
+//    }
+
+// setError(value){
+//   this.setState({error:value})
+// }
+
+// noUsernameOrPassword(){
+//     if(_.get(this,'state.showError')){
+//       if(!this.state.username){
+//         return <div className="alert alert-danger">Please enter a username.</div>
+
+//       } 
+//       if (!this.state.password){
+//         return <div className="alert alert-danger">Please enter a password.</div>
+//       }
+//     }
+//   }
+
+// //Need to differentiate the various errors
+// wrongPassword(){
+//   if(_.get(this, 'state.error')){ //using lodash here to null check 
+//     return <div className="alert alert-danger">Incorrect password.</div>
+//   }
+
+// }
 

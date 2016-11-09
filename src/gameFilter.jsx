@@ -44,8 +44,10 @@ class GameFilter extends React.Component {
 								})}
 							 		</div>
 
+							 	<hr className="style18" />
+
+
 								<h2>What type(s) of game would you like to play?</h2>
-								<div className="row">
 										<div className="btn-group" data-toggle="buttons">
 										{["Icebreaker", 
 										  'Card', 
@@ -61,8 +63,10 @@ class GameFilter extends React.Component {
 									    }
 							
 										
-									</div>
 								</div>
+
+								<hr className="style18" />
+
 								<h2>How long would you like the game to be?</h2>
 								
 								<div className="btn-group" data-toggle="buttons">
@@ -75,6 +79,7 @@ class GameFilter extends React.Component {
 									})}
 							 	</div>
 
+							 	<hr className="style18" />
 
 			                	<h2>How difficult of a game do you want to play?</h2>
 
@@ -86,6 +91,10 @@ class GameFilter extends React.Component {
 										  </label>)
 									})}
 							 	</div>
+
+
+							 	<hr className="style18" />
+
 							 	<div className="row">
 								 	<div className="col-md-3 col-lg-3">
 								 		<button className="btn btn-success btn-lg" onClick={this.fetchButtonClicked.bind(this)}>Fetch Me A Game!</button>
