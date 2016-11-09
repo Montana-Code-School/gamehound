@@ -79,14 +79,6 @@ class AdminPanel extends React.Component{
 		this.setState(stateUpdate)
 	}
 
-	// removeItemFromList(stateArray, textItem, nameOfState){
-	//     var instructionIndex = stateArray.indexOf(textItem);
-	//   	// console.log("The state array, ", this.state.tutorial.list)
-	//     stateArray.splice(instructionIndex, 1)
-	//     console.log("The textlist array, ", stateArray)
-	//     return this.setState({nameOfState: stateArray})
-	// }
-
 	clearState() {
 		this.setState({tutorial:new ToggleList(),
 					   itemsNeeded: new ToggleList()})
@@ -107,6 +99,9 @@ class AdminPanel extends React.Component{
 		        					<input type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
 		        				</div>
 
+		        			<hr className="style18" />
+
+
 
 		        			<h2>Number of Players</h2>
 
@@ -120,6 +115,7 @@ class AdminPanel extends React.Component{
 								})}
 						 	</div>
 
+						 	<hr className="style18" />
 
 
 							<h2>Type</h2>
@@ -140,6 +136,8 @@ class AdminPanel extends React.Component{
 				
 							</div>
 
+							<hr className="style18" />
+
 							<h2>Length</h2>
 							
 							<div className="btn-group" data-toggle="buttons">
@@ -152,11 +150,15 @@ class AdminPanel extends React.Component{
 								})}
 						 	</div>
 
+						 	<hr className="style18" />
+
 						 	<h2>Description</h2>
 
 						 	<div>
 						 		<textarea onChange={(e)=>this.setState({description:e.target.value})} cols="100" rows="4"></textarea>
 						 	</div>
+
+						 	<hr className="style18" />
 
 						 	<h2>Items Needed</h2>
 
@@ -170,6 +172,8 @@ class AdminPanel extends React.Component{
 						 		<button className="btn btn-success btn-lg raised" onClick={()=>this.stateToggler(this.state.item, 'itemsNeeded')}>Add Item</button>
 						 	</div>
 
+						 	<hr className="style18" />
+
 						 	<h2>Tutorial</h2>
 
 						 	<div>
@@ -182,6 +186,8 @@ class AdminPanel extends React.Component{
 						 		<button className="btn btn-success btn-lg raised" onClick={()=>this.stateToggler(this.state.instruction, 'tutorial')}>Add Instruction</button>
 						 	</div>
 
+						 	<hr className="style18" />
+
 						 	<h2>Rating</h2>
 						 		<select onChange={(e)=>this.setState({rating:e.target.value})}>
 								  <option value="0" > </option>
@@ -191,6 +197,8 @@ class AdminPanel extends React.Component{
 								  <option value="2">2</option>
 								  <option value="1">1</option>
 								</select>
+
+							<hr className="style18" />
 
 		                	<h2>Difficulty</h2>
 
@@ -202,6 +210,8 @@ class AdminPanel extends React.Component{
 									  </label>)
 								})}
 						 	</div>
+
+						 	<hr className="style18" />
 
 						 	<div>
 						 		<button className="btn btn-success btn-lg raised" id="submitButton" onClick={this.createGame.bind(this)}>Submit Game</button>
