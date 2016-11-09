@@ -37,21 +37,10 @@ class AdminPanel extends React.Component{
 				)
 	}
 
-// This definitely needs some work, currently nonfunctioning. For HTML fields key: "value",  onKeyPress={this.add.bind(this)}
-	// add(event){ 
- //         if(event.charCode === 13){
- //            event.preventDefault()
- //            this.stateToggler(this.state.item, "itemsNeeded");
- //         } else if (event.charCode === 13 && this.state.instruction){
- //            event.preventDefault()
- //            this.stateToggler(this.state.instruction, "tutorial");
- //         }
- //    }
-
 	stateToggler(newInput, stateName){
 		var stateUpdate = {}
-		if(stateName === "tutorial" || stateName === "itemsNeeded"){ // this is hard coded... is there a better way? 
-			stateName === "tutorial" ? this.refs.tutorial.value = "" : this.refs.itemsNeeded.value = "" // this needs to change if you add more states to this function
+		if(stateName === "tutorial" || stateName === "itemsNeeded"){ 
+			stateName === "tutorial" ? this.refs.tutorial.value = "" : this.refs.itemsNeeded.value = "" 
 			stateUpdate[stateName] = this.state[stateName].addToTextList(newInput)
 			this.setState(stateUpdate)
 
@@ -67,7 +56,7 @@ class AdminPanel extends React.Component{
 		if(textList.length !== 0) {
 			return textList.map(text => {
 				return (<li>{text}
-				<button type="button" className="btn btn-secondary btn-sm" id="tutorialBtn" onClick={()=>this.callRemoveText(stateName, text)}>X</button>
+				<button type="button" className="btn btn-info btn-xs" id="tutorialBtn" onClick={()=>this.callRemoveText(stateName, text)}>x</button>
 				</li>)
 			})
 		}
@@ -94,6 +83,8 @@ class AdminPanel extends React.Component{
 			if(!this.state.gamePostSuccess){
 		        return  (<div className="container">
 
+		        			
+		        			<h1 className="pageHeader">Create a Game</h1>
 		        			<h2>Game Name</h2>
 		        				<div>
 		        					<input type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
@@ -215,7 +206,7 @@ class AdminPanel extends React.Component{
 
 						 	<div>
 						 		<button className="btn btn-success btn-lg raised" id="submitButton" onClick={this.createGame.bind(this)}>Submit Game</button>
-						 		<button className="btn btn-warning btn-lg raised" onClick={()=>this.setState({tutorial: new ToggleList})}>Clear</button>
+						 		<button className="btn btn-warning btn-lg raised" onClick={()=>this.setState({tutorial: new ToggleList, itemsNeeded: new ToggleList})}>Clear</button>
 
 						 	</div>
 		                </div>)

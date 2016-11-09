@@ -117,7 +117,6 @@ primary - blue buttons, success - green, warning - yellow */
 	background:#FF5719;
 	border:1px #888;
 	border-radius: 1px;
-	margin-top: 15px;
 }
 
 .btn-success {
@@ -128,15 +127,12 @@ primary - blue buttons, success - green, warning - yellow */
 	border-radius: 1px;
 }
 
+
 .btn-success:hover, .btn-success:active, .btn-success:focus {
   color: #ffffff !important;
   background-color: #007f00 !important;
   border-color: #494F57 !important;
 }
-
-
-
-
 
 /* Horizontal line styling */ 
 
@@ -157,8 +153,6 @@ hr.style18:before {
   border-width: 0 0 1px 0; 
   border-radius: 20px; 
 }
-
-
 
 /* Header color changer! */ 
 .rainbow span:nth-child(7n+1):hover {
@@ -182,3 +176,29 @@ hr.style18:before {
 .rainbow span:nth-child(7n+7):hover{
 	color: #37addb
 }
+
+.renderedGame {
+	background-color:#eee;
+	margin: 20px 0;
+	padding:10px;
+}
+
+.renderedResult {
+	font-weight:bold;
+	font-size:1.6em;
+}
+
+.carousel-caption {
+	font-size:1.7em;
+	color:#000;
+	text-shadow:none;
+	text-align: left;
+	top: 40%;
+	transform: translateY(-50%);
+
+}
+
+.pageHeader {
+	font-size: 3em;
+}
+
