@@ -23,7 +23,7 @@ class NavBar extends React.Component {
               </button>
 
               <a href="/">
-                <img src="/imgs/bassetgif.gif" id="dog" className="col-lg-4 col-md-4 col-sm-4 col-xs-4"/>
+                <img src="/imgs/bassetgif.gif" className="dog col-lg-4 col-md-4 col-sm-4 col-xs-4"/>
               </a>
               <div className="col-lg-4 col-sm-4 col-xs-4 rainbow">
                 <a href="/">
@@ -33,7 +33,9 @@ class NavBar extends React.Component {
                 </a>
                 </div>            
               </div>
-            <Login setLogin={this.props.setLogin} loggedIn={this.props.loggedIn}/>
+              <div className="centered-with-logo">
+                <Login setLogin={this.props.setLogin} loggedIn={this.props.loggedIn}/>
+              </div>
           </div>
         </nav>
         )
