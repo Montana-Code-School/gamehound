@@ -164,6 +164,10 @@ primary - blue buttons, success - green, warning - yellow */
   border-color: #494F57 !important;
 }
 
+.btn-xs {
+	margin-left: 10px;
+}
+
 /* Horizontal line styling */ 
 
 hr.style18 { 
@@ -290,6 +294,13 @@ hr.style18:before {
 	.container {
 	padding: 0 20px !important;
 	}
+	.carousel-caption img{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    max-height: 100px
+}
 }
 
 @media(max-width: 400px){

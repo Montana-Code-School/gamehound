@@ -89,7 +89,7 @@ class AdminPanel extends React.Component{
 			return textList.map(text => {
 				return (
 					<li>{text}
-					<button type="button" className="btn btn-info btn-xs" id="tutorialBtn" onClick={()=>this.callRemoveText(stateName, text)}>x</button>
+					<button type="button" className="btn btn-info btn-xs" id="tutorialBtn" onClick={()=>this.callRemoveText(stateName, text)}>X</button>
 					</li>
 						)
 			})
