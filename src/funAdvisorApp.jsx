@@ -32,6 +32,10 @@ class FunAdvisorApp extends React.Component {
         })
     }
 
+    componentDidMount() {
+        document.body.scrollTop = 0;
+    }
+
     setLogin(response){
         this.setState({loggedIn: response.loggedIn})
 
@@ -58,16 +62,17 @@ class FunAdvisorApp extends React.Component {
     
     }
 
+
     render() {
     return (<Router history = {browserHistory}>
         <Route path="/" component={(props) => <Header children={props.children} setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn}/>}>
             <IndexRoute component={() => <GameFilter getGame={this.getGame.bind(this)} /> }/>
-            <Route path='results' component={() =>  <RenderedGames renderedGames={this.state.renderedGames} /> } /> 
-            <Route path='results/:page' component={(props) =>  <RenderedGames params={props.params} renderedGames={this.state.renderedGames} /> } /> 
+            <Route path='results' component={() =>  <RenderedGames renderedGames={this.state.renderedGames} /> }   /> 
+            <Route path='results/:page' component={(props) =>  <RenderedGames params={props.params} renderedGames={this.state.renderedGames} /> }  /> 
             <Route path="game/:gameId" component={Header}/>
             <Route path="login" component={() => <Login setLogin={this.setLogin.bind(this)} loggedIn={this.state.loggedIn} /> } />
             <Route path="signup" component={SignUp}/>
-            <Route path="adminPanel" component={()=> <AdminPanel loggedIn={this.state.loggedIn}/>}/>
+            <Route path="adminPanel" component={()=> <AdminPanel loggedIn={this.state.loggedIn}/>} />
         </Route>
     </Router>)
     }
