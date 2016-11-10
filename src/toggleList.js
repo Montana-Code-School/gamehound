@@ -2,8 +2,8 @@ function ToggleList(list){
 	this.list = list ? list : []
 }
 
+// these methods are used on the adminPanel 
 
-// 
 ToggleList.prototype.toggle = function(item){
 	    var elementIndex = this.list.indexOf(item);
 	    if(elementIndex === -1){ 
@@ -25,6 +25,5 @@ ToggleList.prototype.removeTextFromList = function(textItem){
 	newArray.splice(itemIndex,1)
 	return new ToggleList(newArray)
 }
-
 
 module.exports = ToggleList

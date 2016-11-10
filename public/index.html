@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Gamehound</title>
 
-    <script   src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
+    <!-- CDNs for Jquery, bootstrap, our custom CSS, and two custom Google fonts --> 
+
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
  
@@ -18,9 +20,16 @@
 
   	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans">
   	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Patua+One">
+
   </head>
+
+
+  <!-- ReactDOM puts funAdvisorApp.jsx into "app" div
+  the src of the script needed to have a / in front of it due to using react router with pushing additional levels of directories and changing the relativity of paths -->
+
   <body>
     <div id="app"></div>
-	<script src="/bundle.js"></script>
+    <script src="/bundle.js"></script>
   </body>
+
 </html>
