@@ -84,8 +84,6 @@ class AdminPanel extends React.Component{
 	}
 
 	clearButton(){
-		console.log("refs", this.refs.tutorial.value)
-		// ()=>this.setState({tutorial: new ToggleList, itemsNeeded: new ToggleList})
 		var confirmation = confirm("Are you sure you want to delete this game?")
 		if(confirmation){
 			this.setState({tutorial:new ToggleList(),
@@ -113,8 +111,9 @@ class AdminPanel extends React.Component{
 			if(!this.state.gamePostSuccess){
 		        return  (<div className="container">
 
-		        			
-		        			<h1 className="pageHeader">Create a Game</h1>
+		        			<h1 className="rainbow pageHeader">
+			                    {"Create a Game".split("").map(letter=> <span className="rainbow">{letter}</span> )}
+		                    </h1>
 
 		        			<h2>Game Name</h2>
 		        				<div>
