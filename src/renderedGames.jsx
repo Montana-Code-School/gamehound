@@ -32,6 +32,12 @@ class RenderedGames extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.params.page !== this.props.params.page){
+      document.body.scrollTop = 0;
+    }
+  }
+
   clearState(){
     this.setState({renderedGames: null,
                    difficulty: undefined,
