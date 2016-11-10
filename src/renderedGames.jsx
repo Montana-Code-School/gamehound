@@ -32,6 +32,12 @@ class RenderedGames extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.params.page !== this.props.params.page){
+      document.body.scrollTop = 0;
+    }
+  }
+
   clearState(){
     this.setState({renderedGames: null,
                    difficulty: undefined,
@@ -163,15 +169,15 @@ class RenderedGames extends React.Component {
           <nav aria-label="Page navigation">
             <ul className="pagination">
               <li>
-                <Link to={`/results/${page-1 ? page -1 : page }`} onUpdate={() => window.scrollTo(0, 0)}>
+                <Link to={`/results/${page-1 ? page -1 : page }`}>
                   <span aria-hidden="true">&laquo;</span>
                 </Link>
               </li>
               {
-                _.range(1, Math.ceil(self.props.renderedGames.length / numPerPage) + 1).map((x) => <li><Link to={`/results/${x}`} onUpdate={() => window.scrollTo(0, 0)}>{x}</Link></li>)
+                _.range(1, Math.ceil(self.props.renderedGames.length / numPerPage) + 1).map((x) => <li><Link to={`/results/${x}`}>{x}</Link></li>)
               }
               <li>
-                <Link to={`/results/${parseInt(page) + 1 > Math.ceil(self.props.renderedGames.length / numPerPage) ? page : parseInt(page) + 1}`} onUpdate={() => window.scrollTo(0, 0)}>
+                <Link to={`/results/${parseInt(page) + 1 > Math.ceil(self.props.renderedGames.length / numPerPage) ? page : parseInt(page) + 1}`}>
                   <span aria-hidden="true">&raquo;</span>
                 </Link>
               </li>
