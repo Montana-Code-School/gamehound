@@ -133,7 +133,7 @@ class AdminPanel extends React.Component{
 		var btn = "btn btn-primary";
 		if(this.props.loggedIn){ // if the user is logged in
 			if(!this.state.gamePostSuccess){ // and the user has not just successfully posted a game
-		        return  (<div className="container")
+		        return  (<div className="container">
 
 		        			<h1 className="rainbow pageHeader">
 			                    {"Create a Game".split("").map(letter=> <span className="rainbow">{letter}</span> )}
