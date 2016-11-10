@@ -26,5 +26,4 @@ ToggleList.prototype.removeTextFromList = function(textItem){
 	return new ToggleList(newArray)
 }
 
-
 module.exports = ToggleList

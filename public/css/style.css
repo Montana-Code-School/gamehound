@@ -5,6 +5,11 @@ body {
 	margin-top: 20px;
 }
 
+#myQuestionButton
+{
+    cursor: pointer;
+}
+
 h1 {
 	font-family:'Patua One',serif;
 	font-size:3.5em;
@@ -105,7 +110,7 @@ primary - blue buttons, success - green, warning - yellow */
 	padding:10px;
 }
 
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.active, .open .dropdown-toggle.btn-primary{
 	background-color: #fff !important;
 	color:#0099cc !important;
 }
