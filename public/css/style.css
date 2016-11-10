@@ -216,6 +216,18 @@ hr.style18:before {
   background-color: #666;
 }
 
+.carousel-caption img{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    max-height: 200px
+}
+
+.carousel-caption span{
+	font-weight: bold;
+}
+
 @media (max-width: 1200px) {
     .navbar-header {
         float: none;
@@ -306,7 +318,6 @@ hr.style18:before {
 	.container {
 	margin-bottom: 50px;
 	padding: 0 15px !important;
-}
-
+	}
 }
 
