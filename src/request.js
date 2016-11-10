@@ -1,7 +1,7 @@
-// could install 'fetch' to handle requests rather than this pure Javascript way
-
+// Could install 'fetch' to handle requests rather than this pure Javascript way
 // This is what postman does on the back end
-
+// This allows us to send frontend information to the server to then be handled by 
+// express and mongoose methods to do stuff with the information
 
 function request(url, method, body, callback){
 	var http = new XMLHttpRequest();
@@ -9,7 +9,7 @@ function request(url, method, body, callback){
 	//Send the proper header information along with the request
 	http.setRequestHeader("Content-type", "application/json");
 	http.onreadystatechange = function() {//Call a function when the state changes.
-	    if(http.readyState == 4 && http.status == 200) {
+	    if (http.readyState == 4 && http.status == 200) {
 	        callback(JSON.parse(http.responseText));
 	    }
 	}
