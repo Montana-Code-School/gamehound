@@ -33,7 +33,18 @@ class AdminPanel extends React.Component{
 			difficulty: this.state.difficulty
 			}, () => {this.setState({gamePostSuccess: true,
 									 tutorial:new ToggleList(),
-									 itemsNeeded:new ToggleList()})}
+									 itemsNeeded:new ToggleList(),
+									 renderedGames: null,
+             	   					 difficulty: undefined,
+				               	     time: undefined,
+				                     type: new ToggleList(),
+				               	     numPlayers: new ToggleList(),
+								   	 rating: undefined,
+								   	 gameName: "",
+								   	 description: "",
+								   	 item: "",
+								   	 instruction: ""
+									})}
 				)
 	}
 
@@ -66,11 +77,6 @@ class AdminPanel extends React.Component{
 		var stateUpdate = {}
 		stateUpdate[nameOfState] = this.state[nameOfState].removeTextFromList(textItem)
 		this.setState(stateUpdate)
-	}
-
-	clearState() {
-		this.setState({tutorial:new ToggleList(),
-					   itemsNeeded: new ToggleList()})
 	}
 
 	redirect(){
