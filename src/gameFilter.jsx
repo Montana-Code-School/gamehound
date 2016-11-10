@@ -32,8 +32,15 @@ class GameFilter extends React.Component {
         	var btn = "btn btn-primary btn-lg";
 	        		return (<div>
 			        			
-			        			
-			        				<h2>How many people are playing?</h2>
+			        			<div>
+								 	
+									
+								</div>
+								
+			        				<h2>How many people are playing? <span id="myQuestionButton" type="button" className="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#myModal">
+								 		</span>
+								 	</h2>
+
 			        				<div className="btn-group" data-toggle="buttons">
 			        			{[['1', 1] ,['2', 2], ['3', 3], ['4',4], ['5-7', 5], ['8+', 8]].map(numOfPlayers =>{
 				        		      var gameLabel = numOfPlayers[0];
@@ -43,7 +50,8 @@ class GameFilter extends React.Component {
 									  </label>)
 								})}
 							 		</div>
-
+							 		
+							 			
 							 	<hr className="style18" />
 
 
@@ -100,12 +108,7 @@ class GameFilter extends React.Component {
 								 		<button className="btn btn-success btn-lg" onClick={this.fetchButtonClicked.bind(this)}>Fetch Me A Game!</button>
 								 	</div>
 
-								 	<div className="col-md-3 col-lg-3">
-									<button type="button" className="btn btn-success btn-lg"  data-toggle="modal" data-target="#myModal">
-									  Instructions
-									</button>
-
-								</div>
+								 	
 									<div className="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									  <div className="modal-dialog" role="document">
 									    <div className="modal-content">
