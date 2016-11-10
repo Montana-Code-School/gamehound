@@ -83,6 +83,30 @@ class AdminPanel extends React.Component{
 		browserHistory.push('/')
 	}
 
+	clearButton(){
+		console.log("refs", this.refs.tutorial.value)
+		// ()=>this.setState({tutorial: new ToggleList, itemsNeeded: new ToggleList})
+		var confirmation = confirm("Are you sure you want to delete this game?")
+		if(confirmation){
+			this.setState({tutorial:new ToggleList(),
+			itemsNeeded:new ToggleList(),
+			renderedGames: null,
+			difficulty: undefined,
+	   	    time: undefined,
+	        type: new ToggleList(),
+	   	    numPlayers: new ToggleList(),
+		   	rating: undefined,
+		    gameName: "",
+		   	description: "",
+		   	item: "",
+		   	instruction: ""});
+		   	this.refs.tutorial.value = "";
+		   	this.refs.itemsNeeded.value = ""
+		   	this.refs.gameName.value = "";
+		   	this.refs.description.value = ""
+		}
+	}
+
 	render(){
 		var btn = "btn btn-primary";
 		if(this.props.loggedIn){
@@ -94,7 +118,7 @@ class AdminPanel extends React.Component{
 
 		        			<h2>Game Name</h2>
 		        				<div>
-		        					<input type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
+		        					<input ref="gameName" type="text" onChange={(e)=>this.setState({gameName:e.target.value})}/>
 		        				</div>
 
 		        			<hr className="style18" />
@@ -153,7 +177,7 @@ class AdminPanel extends React.Component{
 						 	<h2>Description</h2>
 
 						 	<div>
-						 		<textarea onChange={(e)=>this.setState({description:e.target.value})} cols="100" rows="4"></textarea>
+						 		<textarea ref="description" onChange={(e)=>this.setState({description:e.target.value})} cols="100" rows="4"></textarea>
 						 	</div>
 
 						 	<hr className="style18" />
@@ -212,8 +236,8 @@ class AdminPanel extends React.Component{
 						 	<hr className="style18" />
 
 						 	<div>
-						 		<button className="btn btn-success" id="submitButton" onClick={this.createGame.bind(this)}>Submit Game</button>
-						 		<button className="btn btn-warning" onClick={()=>this.setState({tutorial: new ToggleList, itemsNeeded: new ToggleList})}>Clear</button>
+						 		<button className="btn btn-success" id="submitButton" onClick={()=>this.createGame.bind(this)}>Submit Game</button>
+						 		<button className="btn btn-warning" onClick={()=>this.clearButton()}>Clear</button>
 
 						 	</div>
 		                </div>)
