@@ -32,6 +32,7 @@ class AdminPanel extends React.Component{
 	// ToggleList, undefined, and empty string determined based on the Game model
 
 	createGame() {
+		console.log("create game button")
 		request('/api/game', 'POST', {
 			gameName: this.state.gameName,
 			numPlayers: this.state.numPlayers, 
@@ -56,6 +57,7 @@ class AdminPanel extends React.Component{
 								   	 item: "",
 								   	 instruction: ""
 									})}
+
 				)
 	}
 
@@ -256,9 +258,8 @@ class AdminPanel extends React.Component{
 						 	<hr className="style18" />
 
 						 	<div>
-						 		<button className="btn btn-success" id="submitButton" onClick={()=>this.createGame.bind(this)}>Submit Game</button>
+						 		<button className="btn btn-success" id="submitButton" onClick={this.createGame.bind(this)}>Submit Game</button>
 						 		<button className="btn btn-warning" onClick={()=>this.clearButton()}>Clear</button>
-
 						 	</div>
 		                </div>)
 		    } else {
