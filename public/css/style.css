@@ -132,10 +132,12 @@ primary - blue buttons, success - green, warning - yellow */
 
 .btn-warning {
 	font-size:1.5em;
+	padding: 10px 20px;
 	background:#FF5719;
 	border:1px #888;
 	border-radius: 1px;
 	margin-left: 12px;
+	margin-bottom: 10px;
 }
 
 .btn-warning:hover {
@@ -219,6 +221,18 @@ hr.style18:before {
   background-color: #666;
 }
 
+.carousel-caption img{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    max-height: 200px
+}
+
+.carousel-caption span{
+	font-weight: bold;
+}
+
 @media (max-width: 1200px) {
     .navbar-header {
         float: none;
@@ -264,11 +278,17 @@ hr.style18:before {
        -webkit-box-shadow: none;
        box-shadow: none;
     }
+    .container {
+	padding: 0 20px !important;
+	}
 }
 
 @media(max-width: 600px){
 	.dog{
 		display: none;
+	}
+	.container {
+	padding: 0 20px !important;
 	}
 }
 
@@ -303,7 +323,6 @@ hr.style18:before {
 	.container {
 	margin-bottom: 50px;
 	padding: 0 15px !important;
-}
-
+	}
 }
 
