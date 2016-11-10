@@ -11,17 +11,20 @@ class RenderedGames extends React.Component {
 
   constructor(props) {
   super(props);
-
   this.state = {type: new ToggleList(),
                 renderedGames: null
                }
+  }
+
+  componentDidMount() {
+        document.body.scrollTop = 0;
   }
 
   stateToggler(newType){
     this.setState({type: this.state.type.toggle(newType)})
   }
 
-  dontShowEmpty(prop){ //Can maybe use to generalize if needed? 
+  dontShowEmpty(prop){ 
     if(prop.length !== 0){
       return (<div className="col-md-4">
                   <h4>Items Needed:</h4> <h4 className="renderedResult">{prop}</h4>
@@ -31,11 +34,11 @@ class RenderedGames extends React.Component {
 
   clearState(){
     this.setState({renderedGames: null,
-             difficulty: undefined,
-               time: undefined,
-               type: new ToggleList(),
-               numPlayers: undefined
-            }) 
+                   difficulty: undefined,
+                    time: undefined,
+                    type: new ToggleList(),
+                    numPlayers: undefined
+                  }) 
   }
   
   render(){
@@ -54,7 +57,8 @@ class RenderedGames extends React.Component {
                   </Link>
                 </li>
                 {
-                  _.range(1, Math.ceil(self.props.renderedGames.length / numPerPage) + 1).map((x) => <li><Link to={`/results/${x}`}>{x}</Link></li>)
+                  _.range(1, Math.ceil(self.props.renderedGames.length / numPerPage) + 1).map((x) => <li><Link to={`/results/${x}`}
+                  >{x}</Link></li>)
                 }
                 <li>
                   <Link to={`/results/${parseInt(page) + 1 > Math.ceil(self.props.renderedGames.length / numPerPage) ? page : parseInt(page) + 1}`}>
@@ -70,6 +74,9 @@ class RenderedGames extends React.Component {
               {(this.props.renderedGames.slice((page-1) * numPerPage, (page) * numPerPage)|| []).map(function(game) { 
                   carouselId++;
                   carouselIndex = 0
+
+                  var percentColor = game.totalScore < 80 ? (game.totalScore < 50 ? "yellow-percent" : "blue-percent") : "green-percent";
+
                   return (
                     <div className="container">
 
@@ -81,9 +88,10 @@ class RenderedGames extends React.Component {
                           </div>
                           
                           <div className="col-md-4">
-                            <h4>Percent Match:</h4> <h4 className="renderedResult">{game.totalScore}%</h4>  
+  								   		    <h4>Match:</h4> <h4 className={"renderedResult " + percentColor}>{game.totalScore}%</h4>  
                           </div>
                         </div>
+
                         <div className="row">
                           <div className="col-md-5">
                             <h4>Type:</h4> <h4 className="renderedResult">{game.type.join(", ")}</h4>

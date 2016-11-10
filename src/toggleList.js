@@ -2,8 +2,8 @@ function ToggleList(list){
 	this.list = list ? list : []
 }
 
+// these methods are used on the adminPanel 
 
-// 
 ToggleList.prototype.toggle = function(item){
 	    var elementIndex = this.list.indexOf(item);
 	    if(elementIndex === -1){ 

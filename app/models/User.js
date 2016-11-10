@@ -1,3 +1,6 @@
+// Currently in the database there is only one user - admin -
+// which allows admin to create games,
+// but signup and login are both configured to add more users to DB.
 
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');

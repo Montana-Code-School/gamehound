@@ -1,6 +1,8 @@
 var _ = require('lodash')
 var mongoose = require('mongoose');
 
+// sets up our database model
+
 var gameSchema = mongoose.Schema({
 
 	gameName: String,
@@ -14,22 +16,28 @@ var gameSchema = mongoose.Schema({
 	difficulty: String
 })
 
-													
+// this is a static method of our database model
+
 gameSchema.statics.createFilterScore = function(userInput, callback) {
 	this.find(function(err, games) {
 
 		if (err) {
 			callback(err)
 		} else {
+			// if user selects Drinking or Roadtrip, they will not receive a game back that is Roadtrip or Drinking
 			var sortedGames = games
 			.filter(game => {
 				return !(((userInput.type.indexOf('Drinking') !== -1 && game.type.indexOf('Roadtrip') !== -1)) || ((userInput.type.indexOf('Roadtrip') !== -1 && game.type.indexOf('Drinking') !== -1)))
 			})
+			// use the scoreGame function to assign each game object a new property with the calculated score
 			.map(function(game) {
 				return scoreGame(userInput.difficulty, userInput.numPlayers, userInput.time, userInput.type, game)
-			}).sort(function(game1, game2) {
+			})
+			// sorts games from highest to lowest match
+			.sort(function(game1, game2) {
 				return game2.totalScore - game1.totalScore
 			})
+			// sends out sortedGames as final resp
 			callback(null, sortedGames)
 		}
 	})

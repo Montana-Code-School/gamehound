@@ -1,5 +1,4 @@
-//this is the individual game that the user has selected to play either in progress or finished
-//Didn't use but would use to assign ratings and saved games..etc
+// We didn't use, but would use to assign ratings and save games, or add user's own, etc.
 
 var mongoose = require('mongoose');
 var Game = require('./Game.js');
@@ -16,7 +15,7 @@ var userGameSchema = mongoose.Schema({
 	username: String,
 	players: [playerSchema],
 	dateCompleted: Date,
-	rating: Number //How do we use this to calculate Game rating average?
+	rating: Number
 
 })
 

@@ -80,6 +80,21 @@ a {
 	transform: translateY(-50%);
 }
 
+.green-percent, .blue-percent, .yellow-percent {
+		font-size:4em;
+}
+
+.green-percent {
+	color:#007f00;
+}
+
+.blue-percent {
+	color:#0099cc;
+}
+
+.yellow-percent {
+	color:#d19e1f;
+}
 
 /* This is a bad way to make user login/creategame & logout buttons centered-ish with logo */
 
@@ -193,6 +208,15 @@ hr.style18:before {
 .pageHeader {
 	font-size: 3em;
 	margin-bottom: 50px;
+}
+
+.carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+}
+
+.carousel-indicators .active {
+  background-color: #666;
 }
 
 @media (max-width: 1200px) {
